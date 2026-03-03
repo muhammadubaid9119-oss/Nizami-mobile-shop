@@ -5,235 +5,251 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 
-body{margin:0;font-family:Arial;background:#f5f5f5}
+body{
+font-family: Arial;
+margin:0;
+background:#f1f3f6;
+}
 
-/* Header */
-.header{
-background:#d90000;
+header{
+background:#2874f0;
 color:white;
 padding:15px;
 text-align:center;
-font-size:20px;
-font-weight:bold;
+font-size:22px;
 }
 
-/* Slider */
-.slider{
-width:100%;
-height:180px;
-overflow:hidden;
-position:relative;
-}
-.slide{
-width:100%;
-height:180px;
-position:absolute;
-transition:1s;
-}
-.slide img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-/* Search */
-.search-box{
-padding:10px;
+.controls{
 background:white;
+padding:15px;
 text-align:center;
 }
-.search-box input{
-width:90%;
-padding:10px;
-border-radius:25px;
-border:1px solid #ccc;
+
+input, select{
+padding:8px;
+margin:5px;
+width:200px;
 }
 
-/* Products */
+button{
+padding:8px 12px;
+background:green;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
 .products{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
 gap:15px;
 padding:15px;
 }
+
 .card{
 background:white;
 padding:10px;
-border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,0.1);
+border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 text-align:center;
 }
+
 .card img{
-width:100%;
-height:140px;
+width:150px;
+height:150px;
 object-fit:contain;
 }
-.price{color:green;font-weight:bold}
-.btn{
-width:100%;
-padding:8px;
-border:none;
-border-radius:5px;
-margin-top:5px;
-cursor:pointer;
-}
-.whatsapp{background:#25D366;color:white}
-.detail{background:#333;color:white}
 
-/* Modal */
-.modal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.6);
-justify-content:center;
-align-items:center;
+.price{
+color:green;
+font-weight:bold;
 }
-.modal-content{
+
+.adminPanel{
 background:white;
 padding:20px;
+margin:15px;
 border-radius:10px;
-width:90%;
-max-width:400px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-/* Admin */
-.admin{
-padding:10px;
-background:#fff;
-margin:10px;
-border-radius:10px;
+.hidden{
+display:none;
 }
 
 </style>
 </head>
 <body>
 
-<div class="header">
+<header>
 Nizami Mobile Shop - Maudaha Hamirpur
+<br>
+<button onclick="toggleAdmin()">Admin Panel</button>
+</header>
+
+<div class="controls">
+<input type="text" id="search" placeholder="Search phone..." onkeyup="filterProducts()">
+<select id="brandFilter" onchange="filterProducts()">
+<option value="All">All Brands</option>
+<option>Samsung</option>
+<option>Apple</option>
+<option>Xiaomi</option>
+<option>Realme</option>
+<option>Vivo</option>
+<option>Oppo</option>
+<option>Motorola</option>
+</select>
 </div>
 
-<!-- IMAGE SLIDER -->
-<div class="slider">
-<div class="slide"><img src="https://via.placeholder.com/600x180?text=Best+Mobile+Deals"></div>
-<div class="slide"><img src="https://via.placeholder.com/600x180?text=Latest+Smartphones"></div>
-<div class="slide"><img src="https://via.placeholder.com/600x180?text=Discount+Offers"></div>
-</div>
-
-<!-- SEARCH -->
-<div class="search-box">
-<input type="text" id="searchInput" placeholder="Search Mobile..." onkeyup="searchProduct()">
-</div>
-
-<!-- PRODUCTS -->
-<div class="products" id="productList">
-
-<div class="card">
-<img src="https://via.placeholder.com/150">
-<h3>Samsung Galaxy A15</h3>
-<div class="price">₹12999</div>
-<button class="btn detail" onclick="showDetail('Samsung Galaxy A15','6GB RAM, 128GB Storage','12999')">View Details</button>
-<button class="btn whatsapp" onclick="orderNow('Samsung Galaxy A15','12999')">Order on WhatsApp</button>
-</div>
-
-</div>
-
-<!-- PRODUCT DETAIL MODAL -->
-<div class="modal" id="modal">
-<div class="modal-content">
-<h2 id="modalTitle"></h2>
-<p id="modalDesc"></p>
-<h3 id="modalPrice"></h3>
-<button class="btn" onclick="closeModal()">Close</button>
-</div>
-</div>
+<div class="products" id="productContainer"></div>
 
 <!-- ADMIN PANEL -->
-<div class="admin">
-<h3>Admin Panel</h3>
-<input type="password" id="adminPass" placeholder="Enter Password">
-<button onclick="checkAdmin()">Login</button>
+<div class="adminPanel hidden" id="adminPanel">
+<h2>Add Product</h2>
 
-<div id="adminArea" style="display:none;">
-<br>
-<input type="text" id="newName" placeholder="Phone Name"><br><br>
-<input type="text" id="newPrice" placeholder="Price"><br><br>
-<input type="text" id="newDesc" placeholder="Description"><br><br>
+<input type="text" id="brand" placeholder="Brand Name"><br>
+<input type="text" id="name" placeholder="Phone Name"><br>
+<input type="number" id="price" placeholder="Base Price"><br>
+<input type="file" id="image" accept="image/*"><br><br>
+
 <button onclick="addProduct()">Add Product</button>
-</div>
+
+<h3>Manage Products</h3>
+<div id="adminProducts"></div>
 </div>
 
 <script>
 
-/* SEARCH */
-function searchProduct(){
-let input=document.getElementById("searchInput").value.toLowerCase();
-let cards=document.querySelectorAll(".card");
-cards.forEach(card=>{
-let title=card.querySelector("h3").innerText.toLowerCase();
-card.style.display=title.includes(input)?"block":"none";
-});
+function toggleAdmin(){
+document.getElementById("adminPanel").classList.toggle("hidden");
 }
 
-/* WHATSAPP */
-function orderNow(product,price){
-let msg=`Hello, I want to order ${product} Price ₹${price} from Nizami Mobile Shop Maudaha Hamirpur.`;
-window.open(`https://wa.me/919119606562?text=${encodeURIComponent(msg)}`,'_blank');
+function getProducts(){
+return JSON.parse(localStorage.getItem("products")) || [];
 }
 
-/* DETAIL MODAL */
-function showDetail(name,desc,price){
-document.getElementById("modalTitle").innerText=name;
-document.getElementById("modalDesc").innerText=desc;
-document.getElementById("modalPrice").innerText="Price ₹"+price;
-document.getElementById("modal").style.display="flex";
-}
-function closeModal(){
-document.getElementById("modal").style.display="none";
-}
-
-/* SLIDER */
-let slides=document.querySelectorAll(".slide");
-let index=0;
-setInterval(()=>{
-slides.forEach((slide,i)=>{
-slide.style.left=((i-index)*100)+"%";
-});
-index=(index+1)%slides.length;
-},3000);
-
-/* ADMIN */
-function checkAdmin(){
-let pass=document.getElementById("adminPass").value;
-if(pass==="1234"){
-document.getElementById("adminArea").style.display="block";
-}else{
-alert("Wrong Password");
-}
+function saveProducts(products){
+localStorage.setItem("products", JSON.stringify(products));
 }
 
 function addProduct(){
-let name=document.getElementById("newName").value;
-let price=document.getElementById("newPrice").value;
-let desc=document.getElementById("newDesc").value;
 
-let productHTML=`
-<div class="card">
-<img src="https://via.placeholder.com/150">
-<h3>${name}</h3>
-<div class="price">₹${price}</div>
-<button class="btn detail" onclick="showDetail('${name}','${desc}','${price}')">View Details</button>
-<button class="btn whatsapp" onclick="orderNow('${name}','${price}')">Order on WhatsApp</button>
-</div>`;
+let brand=document.getElementById("brand").value;
+let name=document.getElementById("name").value;
+let price=document.getElementById("price").value;
+let imageInput=document.getElementById("image");
 
-document.getElementById("productList").innerHTML+=productHTML;
-alert("Product Added Successfully");
+if(!brand||!name||!price||!imageInput.files[0]){
+alert("Sab details bharo");
+return;
 }
+
+let reader=new FileReader();
+
+reader.onload=function(){
+
+let products=getProducts();
+
+products.push({
+brand:brand,
+name:name,
+price:parseInt(price),
+image:reader.result
+});
+
+saveProducts(products);
+
+document.getElementById("brand").value="";
+document.getElementById("name").value="";
+document.getElementById("price").value="";
+document.getElementById("image").value="";
+
+loadProducts();
+loadAdminProducts();
+}
+
+reader.readAsDataURL(imageInput.files[0]);
+}
+
+function deleteProduct(index){
+let products=getProducts();
+products.splice(index,1);
+saveProducts(products);
+loadProducts();
+loadAdminProducts();
+}
+
+function loadProducts(){
+
+let products=getProducts();
+let container=document.getElementById("productContainer");
+container.innerHTML="";
+
+products.forEach((p,index)=>{
+
+let finalPrice=Math.round(p.price*1.05);
+
+container.innerHTML+=`
+<div class="card">
+<img src="${p.image}">
+<h3>${p.brand}</h3>
+<p>${p.name}</p>
+<p class="price">₹${finalPrice}</p>
+</div>
+`;
+});
+}
+
+function loadAdminProducts(){
+
+let products=getProducts();
+let admin=document.getElementById("adminProducts");
+admin.innerHTML="";
+
+products.forEach((p,index)=>{
+
+admin.innerHTML+=`
+<div style="margin-bottom:10px;">
+${p.brand} ${p.name}
+<button onclick="deleteProduct(${index})">Delete</button>
+</div>
+`;
+});
+}
+
+function filterProducts(){
+
+let search=document.getElementById("search").value.toLowerCase();
+let brand=document.getElementById("brandFilter").value;
+
+let products=getProducts();
+
+let filtered=products.filter(p=>{
+return (brand==="All"||p.brand===brand) &&
+(p.name.toLowerCase().includes(search));
+});
+
+let container=document.getElementById("productContainer");
+container.innerHTML="";
+
+filtered.forEach(p=>{
+let finalPrice=Math.round(p.price*1.05);
+container.innerHTML+=`
+<div class="card">
+<img src="${p.image}">
+<h3>${p.brand}</h3>
+<p>${p.name}</p>
+<p class="price">₹${finalPrice}</p>
+</div>
+`;
+});
+}
+
+loadProducts();
+loadAdminProducts();
 
 </script>
 
 </body>
-  </html>
+</html>
