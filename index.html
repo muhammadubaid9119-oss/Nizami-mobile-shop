@@ -1,172 +1,239 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Nizami Mobile Shop - Maudaha Hamirpur</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Nizami Mobile Shop Maudaha Hamirpur me best mobile price. WhatsApp se order karein ya QR scan karke payment karein.">
+<title>Nizami Mobile Shop - Maudaha Hamirpur</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
 
-  <style>
-    body { margin:0; font-family:Arial; background:#f2f2f2; }
+body{margin:0;font-family:Arial;background:#f5f5f5}
 
-    header {
-      background:linear-gradient(45deg,#000,#444);
-      color:white;
-      padding:20px;
-      text-align:center;
-      font-size:22px;
-      font-weight:bold;
-    }
+/* Header */
+.header{
+background:#d90000;
+color:white;
+padding:15px;
+text-align:center;
+font-size:20px;
+font-weight:bold;
+}
 
-    .container {
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      padding:20px;
-    }
+/* Slider */
+.slider{
+width:100%;
+height:180px;
+overflow:hidden;
+position:relative;
+}
+.slide{
+width:100%;
+height:180px;
+position:absolute;
+transition:1s;
+}
+.slide img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
 
-    .card {
-      background:white;
-      width:280px;
-      margin:15px;
-      border-radius:12px;
-      box-shadow:0 5px 15px rgba(0,0,0,0.15);
-      text-align:center;
-      padding:15px;
-      transition:0.3s;
-    }
+/* Search */
+.search-box{
+padding:10px;
+background:white;
+text-align:center;
+}
+.search-box input{
+width:90%;
+padding:10px;
+border-radius:25px;
+border:1px solid #ccc;
+}
 
-    .card:hover { transform:scale(1.05); }
+/* Products */
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:15px;
+padding:15px;
+}
+.card{
+background:white;
+padding:10px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+text-align:center;
+}
+.card img{
+width:100%;
+height:140px;
+object-fit:contain;
+}
+.price{color:green;font-weight:bold}
+.btn{
+width:100%;
+padding:8px;
+border:none;
+border-radius:5px;
+margin-top:5px;
+cursor:pointer;
+}
+.whatsapp{background:#25D366;color:white}
+.detail{background:#333;color:white}
 
-    .card img { width:100%; border-radius:10px; }
+/* Modal */
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+justify-content:center;
+align-items:center;
+}
+.modal-content{
+background:white;
+padding:20px;
+border-radius:10px;
+width:90%;
+max-width:400px;
+}
 
-    .price {
-      color:green;
-      font-size:18px;
-      font-weight:bold;
-      margin:10px 0;
-    }
+/* Admin */
+.admin{
+padding:10px;
+background:#fff;
+margin:10px;
+border-radius:10px;
+}
 
-    .btn {
-      background:#25D366;
-      color:white;
-      padding:10px 15px;
-      border:none;
-      border-radius:6px;
-      cursor:pointer;
-      font-weight:bold;
-      margin:5px;
-    }
-
-    .pay-btn { background:#007bff; }
-
-    .order-section {
-      background:white;
-      margin:30px auto;
-      padding:20px;
-      max-width:400px;
-      border-radius:10px;
-      box-shadow:0 4px 12px rgba(0,0,0,0.1);
-      text-align:center;
-    }
-
-    input {
-      width:100%;
-      padding:10px;
-      margin:8px 0;
-      border-radius:5px;
-      border:1px solid #ccc;
-    }
-
-    #qrSection {
-      display:none;
-      margin-top:20px;
-    }
-
-    #qrSection img {
-      width:200px;
-      margin-top:10px;
-    }
-
-    .whatsapp-float {
-      position:fixed;
-      bottom:20px;
-      right:20px;
-      background:#25D366;
-      color:white;
-      padding:15px;
-      border-radius:50%;
-      font-size:20px;
-      text-decoration:none;
-      box-shadow:0 4px 10px rgba(0,0,0,0.3);
-   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScbvG-aG6pvZmmtpPLw4Dlagyd1nXwAMSG_JKV1TrjmaJSQcQ/viewform?embedded=true" width="640" height="2159" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe> }
-    
-  </style>
+</style>
 </head>
-
 <body>
 
-<header>Nizami Mobile Shop - Maudaha Hamirpur</header>
+<div class="header">
+Nizami Mobile Shop - Maudaha Hamirpur
+</div>
 
-<div class="container">
+<!-- IMAGE SLIDER -->
+<div class="slider">
+<div class="slide"><img src="https://via.placeholder.com/600x180?text=Best+Mobile+Deals"></div>
+<div class="slide"><img src="https://via.placeholder.com/600x180?text=Latest+Smartphones"></div>
+<div class="slide"><img src="https://via.placeholder.com/600x180?text=Discount+Offers"></div>
+</div>
 
-  <div class="card">
-    <img src="https://via.placeholder.com/250x250.png?text=Samsung+A15">
-    <h3>Samsung Galaxy A15</h3>
-    <p class="price">₹14,999</p>
-    <button class="btn" onclick="selectMobile('Samsung Galaxy A15','14999')">Order</button>
-  </div>
+<!-- SEARCH -->
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search Mobile..." onkeyup="searchProduct()">
+</div>
 
-  <div class="card">
-    <img src="https://via.placeholder.com/250x250.png?text=Vivo+Y27">
-    <h3>Vivo Y27</h3>
-    <p class="price">₹12,499</p>
-    <button class="btn" onclick="selectMobile('Vivo Y27','12499')">Order</button>
-  </div>
+<!-- PRODUCTS -->
+<div class="products" id="productList">
+
+<div class="card">
+<img src="https://via.placeholder.com/150">
+<h3>Samsung Galaxy A15</h3>
+<div class="price">₹12999</div>
+<button class="btn detail" onclick="showDetail('Samsung Galaxy A15','6GB RAM, 128GB Storage','12999')">View Details</button>
+<button class="btn whatsapp" onclick="orderNow('Samsung Galaxy A15','12999')">Order on WhatsApp</button>
+</div>
 
 </div>
 
-<div class="order-section">
-  <h3>Complete Your Order</h3>
-  <input type="text" id="name" placeholder="Your Name" required>
-  <input type="text" id="phone" placeholder="Your Phone Number" required>
-  <input type="text" id="selectedMobile" placeholder="Selected Mobile" readonly>
-  <input type="text" id="amount" placeholder="Amount" readonly>
-
-  <button class="btn" onclick="sendToWhatsApp()">Confirm on WhatsApp</button>
-  <button class="btn pay-btn" onclick="showQR()">Pay Now (Scan QR)</button>
-
-  <div id="qrSection">
-    <h3>Scan & Pay</h3>
-    <img src="qr.png">
-    <p>Payment karne ke baad WhatsApp par screenshot bhej dein.</p>
-  </div>
+<!-- PRODUCT DETAIL MODAL -->
+<div class="modal" id="modal">
+<div class="modal-content">
+<h2 id="modalTitle"></h2>
+<p id="modalDesc"></p>
+<h3 id="modalPrice"></h3>
+<button class="btn" onclick="closeModal()">Close</button>
+</div>
 </div>
 
-<a href="https://wa.me/919119606562" target="_blank" class="whatsapp-float">💬</a>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScbvG-aG6pvZmmtpPLw4Dlagyd1nXwAMSG_JKV1TrjmaJSQcQ/viewform?embedded=true" width="640" height="2159" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+<!-- ADMIN PANEL -->
+<div class="admin">
+<h3>Admin Panel</h3>
+<input type="password" id="adminPass" placeholder="Enter Password">
+<button onclick="checkAdmin()">Login</button>
+
+<div id="adminArea" style="display:none;">
+<br>
+<input type="text" id="newName" placeholder="Phone Name"><br><br>
+<input type="text" id="newPrice" placeholder="Price"><br><br>
+<input type="text" id="newDesc" placeholder="Description"><br><br>
+<button onclick="addProduct()">Add Product</button>
+</div>
+</div>
+
 <script>
-function selectMobile(name,price){
-  document.getElementById("selectedMobile").value=name;
-  document.getElementById("amount").value="₹"+price;
-  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+
+/* SEARCH */
+function searchProduct(){
+let input=document.getElementById("searchInput").value.toLowerCase();
+let cards=document.querySelectorAll(".card");
+cards.forEach(card=>{
+let title=card.querySelector("h3").innerText.toLowerCase();
+card.style.display=title.includes(input)?"block":"none";
+});
 }
 
-function sendToWhatsApp(){
-  var name=document.getElementById("name").value;
-  var phone=document.getElementById("phone").value;
-  var mobile=document.getElementById("selectedMobile").value;
-  var amount=document.getElementById("amount").value;
-
-  var msg="New Order:%0AName:"+name+"%0APhone:"+phone+"%0AMobile:"+mobile+"%0AAmount:"+amount;
-  window.open("https://wa.me/919119606562?text="+msg,"_blank");
+/* WHATSAPP */
+function orderNow(product,price){
+let msg=`Hello, I want to order ${product} Price ₹${price} from Nizami Mobile Shop Maudaha Hamirpur.`;
+window.open(`https://wa.me/919119606562?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
-function showQR(){
-  document.getElementById("qrSection").style.display="block";
-  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+/* DETAIL MODAL */
+function showDetail(name,desc,price){
+document.getElementById("modalTitle").innerText=name;
+document.getElementById("modalDesc").innerText=desc;
+document.getElementById("modalPrice").innerText="Price ₹"+price;
+document.getElementById("modal").style.display="flex";
 }
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
+/* SLIDER */
+let slides=document.querySelectorAll(".slide");
+let index=0;
+setInterval(()=>{
+slides.forEach((slide,i)=>{
+slide.style.left=((i-index)*100)+"%";
+});
+index=(index+1)%slides.length;
+},3000);
+
+/* ADMIN */
+function checkAdmin(){
+let pass=document.getElementById("adminPass").value;
+if(pass==="1234"){
+document.getElementById("adminArea").style.display="block";
+}else{
+alert("Wrong Password");
+}
+}
+
+function addProduct(){
+let name=document.getElementById("newName").value;
+let price=document.getElementById("newPrice").value;
+let desc=document.getElementById("newDesc").value;
+
+let productHTML=`
+<div class="card">
+<img src="https://via.placeholder.com/150">
+<h3>${name}</h3>
+<div class="price">₹${price}</div>
+<button class="btn detail" onclick="showDetail('${name}','${desc}','${price}')">View Details</button>
+<button class="btn whatsapp" onclick="orderNow('${name}','${price}')">Order on WhatsApp</button>
+</div>`;
+
+document.getElementById("productList").innerHTML+=productHTML;
+alert("Product Added Successfully");
+}
+
 </script>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScbvG-aG6pvZmmtpPLw4Dlagyd1nXwAMSG_JKV1TrjmaJSQcQ/viewform?embedded=true" width="640" height="2159" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-  
+
 </body>
-                                                                               </html>
+  </html>
