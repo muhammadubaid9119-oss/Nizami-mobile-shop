@@ -1,82 +1,255 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<title>Nizami Mobile Shop - Maudaha Hamirpur</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>nizami Mobile Shop</title>
 <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+
+body{
+font-family: Arial;
+margin:0;
+background:#f1f3f6;
 }
-header {
-    background: #111;
-    color: white;
-    text-align: center;
-    padding: 20px;
+
+header{
+background:#2874f0;
+color:white;
+padding:15px;
+text-align:center;
+font-size:22px;
 }
-.container {
-    padding: 15px;
+
+.controls{
+background:white;
+padding:15px;
+text-align:center;
 }
-.product {
-    background: white;
-    padding: 15px;
-    margin: 15px 0;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+input, select{
+padding:8px;
+margin:5px;
+width:200px;
 }
-.product img {
-    width: 100%;
-    border-radius: 10px;
+
+button{
+padding:8px 12px;
+background:green;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
 }
-.button {
-    display: inline-block;
-    padding: 10px 15px;
-    background: green;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 10px;
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+gap:15px;
+padding:15px;
 }
-footer {
-    background: #111;
-    color: white;
-    text-align: center;
-    padding: 10px;
+
+.card{
+background:white;
+padding:10px;
+border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+text-align:center;
 }
+
+.card img{
+width:150px;
+height:150px;
+object-fit:contain;
+}
+
+.price{
+color:green;
+font-weight:bold;
+}
+
+.adminPanel{
+background:white;
+padding:20px;
+margin:15px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.hidden{
+display:none;
+}
+
 </style>
 </head>
-
 <body>
 
 <header>
-    <h1>nizami Mobile Shop</h1>
-    <p>Best Mobile Deals in Your City</p>
+Nizami Mobile Shop - Maudaha Hamirpur
+<br>
+<button onclick="toggleAdmin()">Admin Panel</button>
 </header>
 
-<div class="container">
-
-    <div class="product">
-        <h2>iPhone 17</h2>
-        <img src="https://via.placeholder.com/300x200" alt="iPhone 13">
-        <p>Price: ₹52,999</p>
-        <a class="button" href="https://wa.me/91XXXXXXXXXX">Order on WhatsApp</a>
-    </div>
-
-    <div class="product">
-        <h2>Samsung Galaxy S25</h2>
-        <img src="https://via.placeholder.com/300x200" alt="Samsung">
-        <p>Price: ₹39,999</p>
-        <a class="button" href="https://wa.me/+918853481839>Order on WhatsApp</a>
-    </div>
-
+<div class="controls">
+<input type="text" id="search" placeholder="Search phone..." onkeyup="filterProducts()">
+<select id="brandFilter" onchange="filterProducts()">
+<option value="All">All Brands</option>
+<option>Samsung</option>
+<option>Apple</option>
+<option>Xiaomi</option>
+<option>Realme</option>
+<option>Vivo</option>
+<option>Oppo</option>
+<option>Motorola</option>
+</select>
 </div>
 
-<footer>
-    <p>Contact: 918853481839"</p>
-</footer>
+<div class="products" id="productContainer"></div>
+
+<!-- ADMIN PANEL -->
+<div class="adminPanel hidden" id="adminPanel">
+<h2>Add Product</h2>
+
+<input type="text" id="brand" placeholder="Brand Name"><br>
+<input type="text" id="name" placeholder="Phone Name"><br>
+<input type="number" id="price" placeholder="Base Price"><br>
+<input type="file" id="image" accept="image/*"><br><br>
+
+<button onclick="addProduct()">Add Product</button>
+
+<h3>Manage Products</h3>
+<div id="adminProducts"></div>
+</div>
+
+<script>
+
+function toggleAdmin(){
+document.getElementById("adminPanel").classList.toggle("hidden");
+}
+
+function getProducts(){
+return JSON.parse(localStorage.getItem("products")) || [];
+}
+
+function saveProducts(products){
+localStorage.setItem("products", JSON.stringify(products));
+}
+
+function addProduct(){
+
+let brand=document.getElementById("brand").value;
+let name=document.getElementById("name").value;
+let price=document.getElementById("price").value;
+let imageInput=document.getElementById("image");
+
+if(!brand||!name||!price||!imageInput.files[0]){
+alert("Sab details bharo");
+return;
+}
+
+let reader=new FileReader();
+
+reader.onload=function(){
+
+let products=getProducts();
+
+products.push({
+brand:brand,
+name:name,
+price:parseInt(price),
+image:reader.result
+});
+
+saveProducts(products);
+
+document.getElementById("brand").value="";
+document.getElementById("name").value="";
+document.getElementById("price").value="";
+document.getElementById("image").value="";
+
+loadProducts();
+loadAdminProducts();
+}
+
+reader.readAsDataURL(imageInput.files[0]);
+}
+
+function deleteProduct(index){
+let products=getProducts();
+products.splice(index,1);
+saveProducts(products);
+loadProducts();
+loadAdminProducts();
+}
+
+function loadProducts(){
+
+let products=getProducts();
+let container=document.getElementById("productContainer");
+container.innerHTML="";
+
+products.forEach((p,index)=>{
+
+let finalPrice=Math.round(p.price*1.05);
+
+container.innerHTML+=`
+<div class="card">
+<img src="${p.image}">
+<h3>${p.brand}</h3>
+<p>${p.name}</p>
+<p class="price">₹${finalPrice}</p>
+</div>
+`;
+});
+}
+
+function loadAdminProducts(){
+
+let products=getProducts();
+let admin=document.getElementById("adminProducts");
+admin.innerHTML="";
+
+products.forEach((p,index)=>{
+
+admin.innerHTML+=`
+<div style="margin-bottom:10px;">
+${p.brand} ${p.name}
+<button onclick="deleteProduct(${index})">Delete</button>
+</div>
+`;
+});
+}
+
+function filterProducts(){
+
+let search=document.getElementById("search").value.toLowerCase();
+let brand=document.getElementById("brandFilter").value;
+
+let products=getProducts();
+
+let filtered=products.filter(p=>{
+return (brand==="All"||p.brand===brand) &&
+(p.name.toLowerCase().includes(search));
+});
+
+let container=document.getElementById("productContainer");
+container.innerHTML="";
+
+filtered.forEach(p=>{
+let finalPrice=Math.round(p.price*1.05);
+container.innerHTML+=`
+<div class="card">
+<img src="${p.image}">
+<h3>${p.brand}</h3>
+<p>${p.name}</p>
+<p class="price">₹${finalPrice}</p>
+</div>
+`;
+});
+}
+
+loadProducts();
+loadAdminProducts();
+
+</script>
 
 </body>
 </html>
