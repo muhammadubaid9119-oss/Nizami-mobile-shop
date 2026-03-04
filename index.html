@@ -1,254 +1,237 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Nizami Mobile Shop - Maudaha Hamirpur</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nizami Mobile Shop - Maudaha Hamirpur</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
 
 body{
-font-family: Arial;
-margin:0;
-background:#f1f3f6;
+background:#f4f6f9;
 }
 
-header{
-background:#2874f0;
-color:white;
-padding:15px;
-text-align:center;
+/* Navbar */
+.navbar{
+background:#111;
+padding:15px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+color:#00bcd4;
 font-size:22px;
+font-weight:600;
 }
 
-.controls{
-background:white;
-padding:15px;
-text-align:center;
-}
-
-input, select{
-padding:8px;
-margin:5px;
-width:200px;
-}
-
-button{
-padding:8px 12px;
-background:green;
+.nav-links a{
 color:white;
-border:none;
-border-radius:5px;
-cursor:pointer;
+margin-left:20px;
+text-decoration:none;
+transition:0.3s;
 }
 
+.nav-links a:hover{
+color:#00bcd4;
+}
+
+/* Search */
+.search-box{
+text-align:center;
+margin:30px 0;
+}
+
+.search-box input{
+width:60%;
+padding:12px;
+border-radius:30px;
+border:1px solid #ccc;
+outline:none;
+font-size:16px;
+}
+
+.search-box input:focus{
+border-color:#00bcd4;
+box-shadow:0 0 8px rgba(0,188,212,0.4);
+}
+
+/* Brand Title */
+.brand-title{
+margin:30px 40px 10px;
+font-size:22px;
+color:#333;
+}
+
+/* Product Grid */
 .products{
 display:grid;
-grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-gap:15px;
-padding:15px;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+padding:20px 40px;
 }
 
-.card{
+.product-card{
 background:white;
-padding:10px;
-border-radius:8px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
 text-align:center;
+transition:0.3s;
+opacity:0;
+transform:translateY(20px);
+animation:fadeIn 0.8s forwards;
 }
 
-.card img{
-width:150px;
-height:150px;
+.product-card:hover{
+transform:translateY(-8px);
+}
+
+.product-card img{
+width:100%;
+height:200px;
 object-fit:contain;
 }
 
 .price{
-color:green;
-font-weight:bold;
+color:#00bcd4;
+font-weight:600;
+margin:10px 0;
 }
 
-.adminPanel{
-background:white;
+.btn{
+display:inline-block;
+padding:8px 20px;
+background:#00bcd4;
+color:white;
+border-radius:20px;
+text-decoration:none;
+transition:0.3s;
+}
+
+.btn:hover{
+background:#0097a7;
+}
+
+/* Animation */
+@keyframes fadeIn{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* Footer */
+footer{
+background:#111;
+color:white;
+text-align:center;
 padding:20px;
-margin:15px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
+margin-top:40px;
 }
-
-.hidden{
-display:none;
-}
-
 </style>
 </head>
 <body>
 
-<header>
-Nizami Mobile Shop - Maudaha Hamirpur
-<br>
-<button onclick="toggleAdmin()">Admin Panel</button>
-</header>
-
-<div class="controls">
-<input type="text" id="search" placeholder="Search phone..." onkeyup="filterProducts()">
-<select id="brandFilter" onchange="filterProducts()">
-<option value="All">All Brands</option>
-<option>Samsung</option>
-<option>Apple</option>
-<option>Xiaomi</option>
-<option>Realme</option>
-<option>Vivo</option>
-<option>Oppo</option>
-<option>Motorola</option>
-</select>
+<div class="navbar">
+<div class="logo">Nizami Mobile Shop</div>
+<div class="nav-links">
+<a href="#">Home</a>
+<a href="#">Brands</a>
+<a href="#">Contact</a>
+</div>
 </div>
 
-<div class="products" id="productContainer"></div>
-
-<!-- ADMIN PANEL -->
-<div class="adminPanel hidden" id="adminPanel">
-<h2>Add Product</h2>
-
-<input type="text" id="brand" placeholder="Brand Name"><br>
-<input type="text" id="name" placeholder="Phone Name"><br>
-<input type="number" id="price" placeholder="Base Price"><br>
-<input type="file" id="image" accept="image/*"><br><br>
-
-<button onclick="addProduct()">Add Product</button>
-
-<h3>Manage Products</h3>
-<div id="adminProducts"></div>
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search Mobile..." onkeyup="searchProduct()">
 </div>
+
+<!-- Samsung -->
+<h2 class="brand-title">Samsung Phones</h2>
+<div class="products">
+
+<div class="product-card">
+<img src="https://via.placeholder.com/200" alt="">
+<h3>Samsung Galaxy S23</h3>
+<div class="price">₹74,999</div>
+<a href="#" class="btn">View Details</a>
+</div>
+
+<div class="product-card">
+<img src="https://via.placeholder.com/200" alt="">
+<h3>Samsung Galaxy A54</h3>
+<div class="price">₹32,999</div>
+<a href="#" class="btn">View Details</a>
+</div>
+
+</div>
+
+<!-- Vivo -->
+<h2 class="brand-title">Vivo Phones</h2>
+<div class="products">
+
+<div class="product-card">
+<img src="https://via.placeholder.com/200" alt="">
+<h3>Vivo V29</h3>
+<div class="price">₹28,999</div>
+<a href="#" class="btn">View Details</a>
+</div>
+
+</div>
+
+<!-- Oppo -->
+<h2 class="brand-title">Oppo Phones</h2>
+<div class="products">
+
+<div class="product-card">
+<img src="https://via.placeholder.com/200" alt="">
+<h3>Oppo Reno 10</h3>
+<div class="price">₹29,999</div>
+<a href="#" class="btn">View Details</a>
+</div>
+
+</div>
+
+<!-- Apple -->
+<h2 class="brand-title">Apple iPhones</h2>
+<div class="products">
+
+<div class="product-card">
+<img src="https://via.placeholder.com/200" alt="">
+<h3>iPhone 14</h3>
+<div class="price">₹79,999</div>
+<a href="#" class="btn">View Details</a>
+</div>
+
+</div>
+
+<footer>
+© 2026 Nizami Mobile Shop - Maudaha Hamirpur
+</footer>
 
 <script>
+function searchProduct(){
+let input=document.getElementById('searchInput').value.toLowerCase();
+let cards=document.getElementsByClassName('product-card');
 
-function toggleAdmin(){
-document.getElementById("adminPanel").classList.toggle("hidden");
+for(let i=0;i<cards.length;i++){
+let title=cards[i].getElementsByTagName("h3")[0];
+if(title.innerText.toLowerCase().indexOf(input)>-1){
+cards[i].style.display="";
+}else{
+cards[i].style.display="none";
 }
-
-function getProducts(){
-return JSON.parse(localStorage.getItem("products")) || [];
 }
-
-function saveProducts(products){
-localStorage.setItem("products", JSON.stringify(products));
 }
-
-function addProduct(){
-
-let brand=document.getElementById("brand").value;
-let name=document.getElementById("name").value;
-let price=document.getElementById("price").value;
-let imageInput=document.getElementById("image");
-
-if(!brand||!name||!price||!imageInput.files[0]){
-alert("Sab details bharo");
-return;
-}
-
-let reader=new FileReader();
-
-reader.onload=function(){
-
-let products=getProducts();
-
-products.push({
-brand:brand,
-name:name,
-price:parseInt(price),
-image:reader.result
-});
-
-saveProducts(products);
-
-document.getElementById("brand").value="";
-document.getElementById("name").value="";
-document.getElementById("price").value="";
-document.getElementById("image").value="";
-
-loadProducts();
-loadAdminProducts();
-}
-
-reader.readAsDataURL(imageInput.files[0]);
-}
-
-function deleteProduct(index){
-let products=getProducts();
-products.splice(index,1);
-saveProducts(products);
-loadProducts();
-loadAdminProducts();
-}
-
-function loadProducts(){
-
-let products=getProducts();
-let container=document.getElementById("productContainer");
-container.innerHTML="";
-
-products.forEach((p,index)=>{
-
-let finalPrice=Math.round(p.price*1.05);
-
-container.innerHTML+=`
-<div class="card">
-<img src="${p.image}">
-<h3>${p.brand}</h3>
-<p>${p.name}</p>
-<p class="price">₹${finalPrice}</p>
-</div>
-`;
-});
-}
-
-function loadAdminProducts(){
-
-let products=getProducts();
-let admin=document.getElementById("adminProducts");
-admin.innerHTML="";
-
-products.forEach((p,index)=>{
-
-admin.innerHTML+=`
-<div style="margin-bottom:10px;">
-${p.brand} ${p.name}
-<button onclick="deleteProduct(${index})">Delete</button>
-</div>
-`;
-});
-}
-
-function filterProducts(){
-
-let search=document.getElementById("search").value.toLowerCase();
-let brand=document.getElementById("brandFilter").value;
-
-let products=getProducts();
-
-let filtered=products.filter(p=>{
-return (brand==="All"||p.brand===brand) &&
-(p.name.toLowerCase().includes(search));
-});
-
-let container=document.getElementById("productContainer");
-container.innerHTML="";
-
-filtered.forEach(p=>{
-let finalPrice=Math.round(p.price*1.05);
-container.innerHTML+=`
-<div class="card">
-<img src="${p.image}">
-<h3>${p.brand}</h3>
-<p>${p.name}</p>
-<p class="price">₹${finalPrice}</p>
-</div>
-`;
-});
-}
-
-loadProducts();
-loadAdminProducts();
-
 </script>
 
 </body>
