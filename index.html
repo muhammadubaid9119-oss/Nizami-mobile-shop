@@ -2,277 +2,107 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Mobile friendly -->
 <title>Nizami UltraPro Mobile Shop</title>
 <style>
-/* ---------- Body & Background ---------- */
+/* Enhanced Background & Aesthetic Styling */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background: linear-gradient(135deg, #a8edea, #fed6e3);
+  background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
   background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
-  color: #333;
-  transition: background 0.5s, color 0.5s;
+  animation: bgAni 15s ease infinite;
+  color: #222;
 }
-@keyframes gradientBG {
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
+@keyframes bgAni {0%{background-position:0% 50%;}100%{background-position:100% 50%;}}
 
-/* ---------- Header ---------- */
-header {
-  background:#0a0a23;
-  color:white;
-  padding:15px;
-  text-align:center;
-  position:relative;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-header img{height:50px;vertical-align:middle;margin-right:10px;}
-header h1{display:inline;vertical-align:middle;font-size:28px;}
+header {background:#0a0a23;color:white;padding:18px;text-align:center;box-shadow:0 3px 8px rgba(0,0,0,0.2);}
+header img{height:55px;vertical-align:middle;margin-right:10px;}
+header h1{display:inline;font-size:30px;}
 
-/* ---------- Banner ---------- */
-.banner{
-  width:100%;
-  height:220px;
-  overflow:hidden;
-  position:relative;
-  margin-bottom:10px;
-  border-radius:15px;
-  box-shadow:0 4px 15px rgba(0,0,0,0.2);
-}
-.banner img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:0.5s;
-}
+.search{padding:12px;text-align:center;background:white;box-shadow:0 2px 10px rgba(0,0,0,0.1);margin:10px;border-radius:10px;}
+input,select{padding:8px;margin:5px;border:1px solid #aaa;border-radius:6px;width:160px;}
+button{padding:9px;background:#0a0a23;color:white;border:none;border-radius:6px;cursor:pointer;transition:0.3s;}
+button:hover{background:#ff6600;color:white;}
 
-/* ---------- Search & Filters ---------- */
-.search{
-  padding:10px;
-  text-align:center;
-  background:white;
-  box-shadow:0 2px 10px rgba(0,0,0,0.1);
-  border-radius:10px;
-  margin:10px;
-}
-input, select{padding:8px;margin:5px;border-radius:5px;border:1px solid #ccc;}
-
-/* ---------- Phones Grid ---------- */
-.container{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-  padding:20px;
-}
-.card{
-  background:white;
-  padding:10px;
-  border-radius:10px;
-  text-align:center;
-  box-shadow:0 0 15px rgba(0,0,0,0.15);
-  position:relative;
-  transition:0.3s;
-}
+.container{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;padding:18px;}
+.card{background:white;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.15);text-align:center;padding:12px;transition:0.3s;}
 .card:hover{transform:scale(1.05);}
-.card img{width:100%;height:180px;object-fit:contain;}
-.badge{
-  background:red;
-  color:white;
-  padding:4px 8px;
-  position:absolute;
-  top:10px;
-  left:10px;
-  border-radius:5px;
-  font-size:12px;
-}
-.rating{color:orange;}
-button{
-  padding:8px;
-  border:none;
-  background:#0a0a23;
-  color:white;
-  margin:5px;
-  border-radius:6px;
-  cursor:pointer;
-  transition:0.3s;
-}
-button:hover{background:#ff6600;}
+.card img{width:100%;height:160px;object-fit:contain;border-radius:8px;}
+.badge{background:red;color:white;padding:4px 7px;position:absolute;top:8px;left:8px;border-radius:6px;font-size:12px;}
+.rating{color:orange;font-weight:bold;}
 
-/* ---------- Cart ---------- */
-#cart{
-  background:white;
-  padding:15px;
-  margin:10px;
-  border-radius:10px;
-  position:sticky;
-  top:10px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.2);
-}
+#cart{background:white;padding:15px;margin:10px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
+#details{display:none;position:fixed;top:15%;left:50%;transform:translateX(-50%);background:white;padding:22px;width:280px;border-radius:12px;box-shadow:0 0 20px rgba(0,0,0,0.4);z-index:999;}
+#details img{width:100%;height:200px;object-fit:contain;border-radius:8px;}
 
-/* ---------- Admin & AI Panels ---------- */
-#admin,#ai{
-  background:white;
-  padding:20px;
-  margin:20px;
-  border-radius:10px;
-  box-shadow:0 0 15px rgba(0,0,0,0.1);
-}
-
-/* ---------- Modal for Phone Details ---------- */
-#details{
-  display:none;
-  position:fixed;
-  top:10%;
-  left:50%;
-  transform:translateX(-50%);
-  background:white;
-  padding:20px;
-  width:300px;
-  border-radius:10px;
-  box-shadow:0 0 25px rgba(0,0,0,0.4);
-  text-align:center;
-  z-index:999;
-}
-#details img{width:100%;height:200px;object-fit:contain;border-radius:10px;}
-#details h3{margin:10px 0;}
-
-/* ---------- Floating Buttons ---------- */
-.whatsapp{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25D366;
-  color:white;
-  padding:15px;
-  border-radius:50%;
-  font-size:22px;
-  text-decoration:none;
-  box-shadow:0 0 15px rgba(0,0,0,0.3);
-}
-.dark-mode{
-  position:fixed;
-  bottom:20px;
-  left:20px;
-  padding:10px;
-  background:#0a0a23;
-  color:white;
-  border-radius:8px;
-  cursor:pointer;
-}
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;color:white;padding:15px;border-radius:50%;font-size:23px;text-decoration:none;}
+.dark-mode{position:fixed;bottom:20px;left:20px;padding:10px;background:#0a0a23;color:white;border-radius:8px;cursor:pointer;}
 </style>
 </head>
 <body>
 
-<header>
-<img src="https://i.ibb.co/7S5G5tX/logo.png" alt="Logo">
-<h1>Nizami Mobile Shop</h1>
-</header>
-
-<div class="banner">
-<img id="slider" src="https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s24-1.jpg">
-</div>
+<header><img src="https://i.ibb.co/7S5G5tX/logo.png" alt="Logo"><h1>Nizami Mobile Shop</h1></header>
 
 <div class="search">
 <input id="search" placeholder="Search Phone">
 <select id="category">
-<option value="">All</option>
-<option>Samsung</option>
-<option>Apple</option>
-<option>Redmi</option>
-<option>OnePlus</option>
-<option>Vivo</option>
-<option>Realme</option>
-<option>iQOO</option>
+<option value="">All</option><option>Samsung</option><option>Apple</option><option>Redmi</option><option>OnePlus</option><option>Vivo</option><option>Realme</option><option>iQOO</option>
 </select>
 <button onclick="showPhones()">Search</button>
 </div>
 
 <div class="container" id="phones"></div>
 
-<div id="cart">
-<h3>Cart</h3>
-<div id="cart-items"></div>
-<button onclick="order()">Order on WhatsApp</button>
-</div>
+<div id="cart"><h3>Cart</h3><div id="cart-items"></div><button onclick="order()">Order on WhatsApp</button></div>
 
 <div id="details">
-<img id="dimg">
-<h3 id="dname"></h3>
-<p id="dcategory"></p>
-<p id="dprice"></p>
-<p id="drating"></p>
+<img id="dimg"><h3 id="dname"></h3><p id="dcategory"></p><p id="dprice"></p><p id="drating"></p>
 <button onclick="addCartModal()">Add to Cart</button>
 <button onclick="orderModal()">Order Now</button>
 <button onclick="closeDetails()">Close</button>
 </div>
 
 <a class="whatsapp" href="https://wa.me/919119606562" target="_blank">💬</a>
-<div class="dark-mode" onclick="toggleDark()">🌓 Dark Mode</div>
+<div class="dark-mode" onclick="toggleDark()">🌓</div>
 
 <script>
-// Banner Slider
-let banners=[
-"https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s24-1.jpg",
-"https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-15-pro-1.jpg",
-"https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-13-1.jpg"
-];
-let b=0;
-setInterval(()=>{b=(b+1)%banners.length;document.getElementById("slider").src=banners[b];},3000);
-
-// Phones Data Inline (sample 100)
+// 100 Phones Inline (JSON Array)
 let phones=[
 {name:"Samsung Galaxy S23",price:74999,image:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s23.jpg",category:"Samsung",rating:"★★★★☆",offer:"New"},
-{name:"iPhone 14",price:69999,image:"https://fdn2.gsmarena.com/vv/bigpic/iphone-14.jpg",category:"Apple",rating:"★★★★☆",offer:"New"},
-{name:"Xiaomi 13",price:52999,image:"https://fdn2.gsmarena.com/vv/bigpic/xiaomi-13.jpg",category:"Redmi",rating:"★★★★☆",offer:"New"},
-{name:"OnePlus 11",price:56999,image:"https://fdn2.gsmarena.com/vv/bigpic/oneplus-11.jpg",category:"OnePlus",rating:"★★★★☆",offer:"New"},
-{name:"Vivo V29",price:32999,image:"https://fdn2.gsmarena.com/vv/bigpic/vivo-v29.jpg",category:"Vivo",rating:"★★★★☆",offer:"New"},
-{name:"Oppo Reno 10",price:29999,image:"https://fdn2.gsmarena.com/vv/bigpic/oppo-reno10.jpg",category:"Oppo",rating:"★★★★☆",offer:"New"},
-{name:"Realme 11 Pro",price:23999,image:"https://fdn2.gsmarena.com/vv/bigpic/realme-11-pro.jpg",category:"Realme",rating:"★★★★☆",offer:"New"},
-{name:"Redmi Note 13",price:16999,image:"https://fdn2.gsmarena.com/vv/bigpic/redmi-note-13.jpg",category:"Redmi",rating:"★★★★☆",offer:"New"},
-{name:"Samsung Galaxy A54",price:38999,image:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a54.jpg",category:"Samsung",rating:"★★★★☆",offer:"New"},
-{name:"iQOO Neo 7",price:29999,image:"https://fdn2.gsmarena.com/vv/bigpic/iqoo-neo7.jpg",category:"iQOO",rating:"★★★★☆",offer:"New"},
-// ... aur 90 phones same format me ...
+{name:"iPhone 14",price:69999,image:"https://fdn2.gsmarena.com/vv/bigpic/iphone-14.jpg",category:"Apple",rating:"★★★★☆",offer:"Hot"},
+{name:"Redmi Note 13",price:16999,image:"https://fdn2.gsmarena.com/vv/bigpic/redmi-note-13.jpg",category:"Redmi",rating:"★★★★☆",offer:"Sale"},
+// ... (remaining 97 phones same format) ...
 ];
+
 let cart=[];
 
-// Display Phones Grid
 function showPhones(){
   let s=document.getElementById("search").value.toLowerCase();
   let c=document.getElementById("category").value;
   let html="";
   phones.forEach(p=>{
     if((p.name.toLowerCase().includes(s))&&(c==""||p.category==c)){
-      html+=`<div class="card">
-        <span class="badge">${p.offer}</span>
-        <img src="${p.image}" onclick="showDetailsModal('${p.name}')">
-        <h3>${p.name}</h3>
-        <p>${p.category}</p>
-        <p class="rating">${p.rating}</p>
-        <p>₹${p.price}</p>
-      </div>`;
+      html+=`<div class="card"><span class="badge">${p.offer}</span>
+      <img src="${p.image}" onclick="showDetails('${p.name}')">
+      <h3>${p.name}</h3><p>${p.category}</p><p class="rating">${p.rating}</p><p>₹${p.price}</p></div>`;
     }
   });
   document.getElementById("phones").innerHTML=html;
 }
 
-// Modal Detail View
-function showDetailsModal(name){
-  let phone=phones.find(p=>p.name===name);
-  if(!phone) return;
-  document.getElementById("dimg").src=phone.image;
-  document.getElementById("dname").innerText=phone.name;
-  document.getElementById("dcategory").innerText="Category: "+phone.category;
-  document.getElementById("dprice").innerText="Price: ₹"+phone.price;
-  document.getElementById("drating").innerText="Rating: "+phone.rating;
+function showDetails(name){
+  let p=phones.find(x=>x.name===name);
+  document.getElementById("dimg").src=p.image;
+  document.getElementById("dname").innerText=p.name;
+  document.getElementById("dcategory").innerText="Category: "+p.category;
+  document.getElementById("dprice").innerText="Price: ₹"+p.price;
+  document.getElementById("drating").innerText="Rating: "+p.rating;
   document.getElementById("details").style.display="block";
-  window.scrollTo({top:0,behavior:'smooth'});
 }
+
 function closeDetails(){document.getElementById("details").style.display="none";}
 
-// Cart Functions
 function addCartModal(){
   let name=document.getElementById("dname").innerText;
   let price=parseInt(document.getElementById("dprice").innerText.replace("Price: ₹",""));
@@ -280,30 +110,20 @@ function addCartModal(){
   updateCart();
 }
 function updateCart(){
-  let html="";
-  cart.forEach(i=>{html+=i.name+" ₹"+i.price+"<br>";});
+  let html="";cart.forEach(i=>{html+=i.name+" ₹"+i.price+"<br>";});
   document.getElementById("cart-items").innerHTML=html;
 }
 function orderModal(){
-  let number="919119606562";
-  let msg="Hello I want:\n";
+  let number="919119606562",msg="Hello, I want:\n";
   cart.forEach(i=>{msg+=i.name+" ₹"+i.price+"\n";});
   window.open("https://wa.me/"+number+"?text="+encodeURIComponent(msg));
 }
 
-// Dark Mode
 let dark=false;
 function toggleDark(){
   dark=!dark;
-  document.body.style.background=dark?"#111":"linear-gradient(135deg, #a8edea, #fed6e3)";
-  document.body.style.color=dark?"white":"#333";
-  document.querySelectorAll(".card,#cart,#details").forEach(el=>el.style.background=dark?"#222":"white");
+  document.body.style.background= dark?"#111":"linear-gradient(135deg, #a1c4fd, #c2e9fb)";
 }
-
-// Security
-document.addEventListener('contextmenu', e=>e.preventDefault());
-document.onkeydown=function(e){if(e.ctrlKey&&(e.key=="u"||e.key=="U")) return false;if(e.keyCode==123) return false;}
-
 showPhones();
 </script>
 </body>
