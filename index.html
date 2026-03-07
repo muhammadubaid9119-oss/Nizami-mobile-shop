@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Mobile friendly -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nizami UltraPro Mobile Shop</title>
 <style>
-/* Enhanced Background & Aesthetic Styling */
+/* ---------- Body & Background ---------- */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -13,39 +13,131 @@ body {
   background-size: 400% 400%;
   animation: bgAni 15s ease infinite;
   color: #222;
+  transition: background 0.5s, color 0.5s;
 }
 @keyframes bgAni {0%{background-position:0% 50%;}100%{background-position:100% 50%;}}
 
-header {background:#0a0a23;color:white;padding:18px;text-align:center;box-shadow:0 3px 8px rgba(0,0,0,0.2);}
+/* ---------- Header ---------- */
+header {
+  background:#0a0a23;
+  color:white;
+  padding:18px;
+  text-align:center;
+  box-shadow:0 3px 8px rgba(0,0,0,0.2);
+}
 header img{height:55px;vertical-align:middle;margin-right:10px;}
 header h1{display:inline;font-size:30px;}
 
-.search{padding:12px;text-align:center;background:white;box-shadow:0 2px 10px rgba(0,0,0,0.1);margin:10px;border-radius:10px;}
-input,select{padding:8px;margin:5px;border:1px solid #aaa;border-radius:6px;width:160px;}
+/* ---------- Search & Filters ---------- */
+.search{
+  padding:12px;
+  text-align:center;
+  background:white;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+  margin:10px;
+  border-radius:10px;
+}
+input, select{padding:8px;margin:5px;border:1px solid #aaa;border-radius:6px;width:160px;}
 button{padding:9px;background:#0a0a23;color:white;border:none;border-radius:6px;cursor:pointer;transition:0.3s;}
 button:hover{background:#ff6600;color:white;}
 
-.container{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;padding:18px;}
-.card{background:white;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.15);text-align:center;padding:12px;transition:0.3s;}
+/* ---------- Phones Grid ---------- */
+.container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+  padding:18px;
+}
+.card{
+  background:white;
+  border-radius:10px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.15);
+  text-align:center;
+  padding:12px;
+  transition:0.3s;
+  position:relative;
+}
 .card:hover{transform:scale(1.05);}
 .card img{width:100%;height:160px;object-fit:contain;border-radius:8px;}
 .badge{background:red;color:white;padding:4px 7px;position:absolute;top:8px;left:8px;border-radius:6px;font-size:12px;}
 .rating{color:orange;font-weight:bold;}
 
-#cart{background:white;padding:15px;margin:10px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
-#details{display:none;position:fixed;top:15%;left:50%;transform:translateX(-50%);background:white;padding:22px;width:280px;border-radius:12px;box-shadow:0 0 20px rgba(0,0,0,0.4);z-index:999;}
-#details img{width:100%;height:200px;object-fit:contain;border-radius:8px;}
+/* ---------- Cart ---------- */
+#cart{background:white;padding:15px;margin:10px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.2);position:sticky;top:10px;}
 
-.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;color:white;padding:15px;border-radius:50%;font-size:23px;text-decoration:none;}
-.dark-mode{position:fixed;bottom:20px;left:20px;padding:10px;background:#0a0a23;color:white;border-radius:8px;cursor:pointer;}
+/* ---------- Fullscreen Modal ---------- */
+#details{
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.95);
+  color:white;
+  z-index:999;
+  overflow-y:auto;
+  text-align:center;
+  padding:20px;
+}
+#details img{
+  width:60%; max-width:400px;
+  height:auto;
+  border-radius:10px;
+  margin:15px 0;
+}
+#details h3,p{margin:8px 0;}
+#suggested{display:flex;justify-content:center;flex-wrap:wrap;margin-top:15px;}
+#suggested .card{width:150px;height:auto;margin:10px;cursor:pointer;}
+#suggested img{height:120px;}
+
+/* ---------- Hidden Admin Panel ---------- */
+#adminPanel{
+  display:none;
+  position:fixed;
+  top:10%;
+  right:10px;
+  width:250px;
+  background:white;
+  padding:15px;
+  border-radius:10px;
+  box-shadow:0 0 20px rgba(0,0,0,0.3);
+  z-index:1000;
+}
+#adminPanel input, #adminPanel button{width:100%;margin:5px 0;padding:8px;}
+
+/* ---------- Floating Buttons ---------- */
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:white;
+  padding:15px;
+  border-radius:50%;
+  font-size:23px;
+  text-decoration:none;
+  box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+.dark-mode{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  padding:10px;
+  background:#0a0a23;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+}
 </style>
 </head>
 <body>
 
-<header><img src="https://i.ibb.co/7S5G5tX/logo.png" alt="Logo"><h1>Nizami Mobile Shop</h1></header>
+<header>
+<img src="https://i.ibb.co/7S5G5tX/logo.png" alt="Logo">
+<h1>Nizami Mobile Shop</h1>
+</header>
 
 <div class="search">
-<input id="search" placeholder="Search Phone">
+<input id="search" placeholder="Search Phone" onkeyup="searchPhone(event)">
 <select id="category">
 <option value="">All</option><option>Samsung</option><option>Apple</option><option>Redmi</option><option>OnePlus</option><option>Vivo</option><option>Realme</option><option>iQOO</option>
 </select>
@@ -54,43 +146,86 @@ button:hover{background:#ff6600;color:white;}
 
 <div class="container" id="phones"></div>
 
-<div id="cart"><h3>Cart</h3><div id="cart-items"></div><button onclick="order()">Order on WhatsApp</button></div>
+<div id="cart">
+<h3>Cart</h3>
+<div id="cart-items"></div>
+<button onclick="orderModal()">Order on WhatsApp</button>
+</div>
 
+<!-- Fullscreen Phone Detail Modal -->
 <div id="details">
-<img id="dimg"><h3 id="dname"></h3><p id="dcategory"></p><p id="dprice"></p><p id="drating"></p>
+<button onclick="closeDetails()" style="position:absolute;top:20px;right:20px;padding:10px;background:red;color:white;border:none;border-radius:6px;cursor:pointer;">Close</button>
+<img id="dimg">
+<h3 id="dname"></h3>
+<p id="dcategory"></p>
+<p id="dprice"></p>
+<p id="drating"></p>
 <button onclick="addCartModal()">Add to Cart</button>
 <button onclick="orderModal()">Order Now</button>
-<button onclick="closeDetails()">Close</button>
+<h4 style="margin-top:20px;">Suggested Phones</h4>
+<div id="suggested"></div>
+</div>
+
+<!-- Hidden Admin Panel -->
+<div id="adminPanel">
+<h3>Admin Panel</h3>
+<input id="pname" placeholder="Phone Name">
+<input id="pprice" placeholder="Price">
+<input id="pimg" placeholder="Image URL">
+<input id="pcat" placeholder="Category">
+<button onclick="addPhoneAdmin()">Add Phone</button>
+<button onclick="hideAdmin()">Hide Admin</button>
 </div>
 
 <a class="whatsapp" href="https://wa.me/919119606562" target="_blank">💬</a>
 <div class="dark-mode" onclick="toggleDark()">🌓</div>
 
 <script>
-// 100 Phones Inline (JSON Array)
+// ---------- Phones Array ----------
 let phones=[
 {name:"Samsung Galaxy S23",price:74999,image:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s23.jpg",category:"Samsung",rating:"★★★★☆",offer:"New"},
 {name:"iPhone 14",price:69999,image:"https://fdn2.gsmarena.com/vv/bigpic/iphone-14.jpg",category:"Apple",rating:"★★★★☆",offer:"Hot"},
 {name:"Redmi Note 13",price:16999,image:"https://fdn2.gsmarena.com/vv/bigpic/redmi-note-13.jpg",category:"Redmi",rating:"★★★★☆",offer:"Sale"},
-// ... (remaining 97 phones same format) ...
+{name:"OnePlus 11",price:56999,image:"https://fdn2.gsmarena.com/vv/bigpic/oneplus-11.jpg",category:"OnePlus",rating:"★★★★☆",offer:"New"},
+{name:"Vivo V29",price:32999,image:"https://fdn2.gsmarena.com/vv/bigpic/vivo-v29.jpg",category:"Vivo",rating:"★★★★☆",offer:"New"},
+{name:"Realme 11 Pro",price:23999,image:"https://fdn2.gsmarena.com/vv/bigpic/realme-11-pro.jpg",category:"Realme",rating:"★★★★☆",offer:"New"},
+{name:"iQOO Neo 7",price:29999,image:"https://fdn2.gsmarena.com/vv/bigpic/iqoo-neo7.jpg",category:"iQOO",rating:"★★★★☆",offer:"New"},
+// Add more phones to reach 100+ entries
 ];
 
 let cart=[];
 
+// ---------- Show Phones ----------
 function showPhones(){
   let s=document.getElementById("search").value.toLowerCase();
   let c=document.getElementById("category").value;
   let html="";
   phones.forEach(p=>{
     if((p.name.toLowerCase().includes(s))&&(c==""||p.category==c)){
-      html+=`<div class="card"><span class="badge">${p.offer}</span>
-      <img src="${p.image}" onclick="showDetails('${p.name}')">
-      <h3>${p.name}</h3><p>${p.category}</p><p class="rating">${p.rating}</p><p>₹${p.price}</p></div>`;
+      html+=`<div class="card">
+        <span class="badge">${p.offer}</span>
+        <img src="${p.image}" onclick="showDetails('${p.name}')">
+        <h3>${p.name}</h3>
+        <p>${p.category}</p>
+        <p class="rating">${p.rating}</p>
+        <p>₹${p.price}</p>
+      </div>`;
     }
   });
   document.getElementById("phones").innerHTML=html;
 }
 
+// ---------- Search Event ----------
+function searchPhone(event){
+  let key = event.key || "Enter";
+  showPhones();
+  // Auto-show first matching phone
+  let s=document.getElementById("search").value.toLowerCase();
+  let matched=phones.find(p=>p.name.toLowerCase().includes(s));
+  if(matched) showDetails(matched.name);
+}
+
+// ---------- Fullscreen Modal ----------
 function showDetails(name){
   let p=phones.find(x=>x.name===name);
   document.getElementById("dimg").src=p.image;
@@ -99,10 +234,24 @@ function showDetails(name){
   document.getElementById("dprice").innerText="Price: ₹"+p.price;
   document.getElementById("drating").innerText="Rating: "+p.rating;
   document.getElementById("details").style.display="block";
+  showSuggested(p.category,name);
 }
-
 function closeDetails(){document.getElementById("details").style.display="none";}
 
+// ---------- Suggested Phones ----------
+function showSuggested(cat,excludeName){
+  let suggested=phones.filter(p=>p.category===cat && p.name!==excludeName).slice(0,4);
+  let html="";
+  suggested.forEach(p=>{
+    html+=`<div class="card" onclick="showDetails('${p.name}')">
+      <img src="${p.image}">
+      <h4 style="color:white;">${p.name}</h4>
+    </div>`;
+  });
+  document.getElementById("suggested").innerHTML=html;
+}
+
+// ---------- Cart ----------
 function addCartModal(){
   let name=document.getElementById("dname").innerText;
   let price=parseInt(document.getElementById("dprice").innerText.replace("Price: ₹",""));
@@ -119,12 +268,41 @@ function orderModal(){
   window.open("https://wa.me/"+number+"?text="+encodeURIComponent(msg));
 }
 
+// ---------- Hidden Admin Panel ----------
+function showAdmin(){
+  let pass=prompt("Enter Admin Password:");
+  if(pass==="admin123"){document.getElementById("adminPanel").style.display="block";}
+}
+function hideAdmin(){document.getElementById("adminPanel").style.display="none";}
+function addPhoneAdmin(){
+  let name=document.getElementById("pname").value;
+  let price=parseInt(document.getElementById("pprice").value);
+  let img=document.getElementById("pimg").value;
+  let cat=document.getElementById("pcat").value || "Other";
+  phones.push({name,price,image:img,category:cat,rating:"★★★★☆",offer:"New"});
+  showPhones();
+  document.getElementById("pname").value=""; document.getElementById("pprice").value="";
+  document.getElementById("pimg").value=""; document.getElementById("pcat").value="";
+}
+
+// ---------- Dark Mode ----------
 let dark=false;
 function toggleDark(){
   dark=!dark;
   document.body.style.background= dark?"#111":"linear-gradient(135deg, #a1c4fd, #c2e9fb)";
+  document.body.style.color= dark?"white":"#222";
+  document.querySelectorAll(".card,#cart,#details,#adminPanel").forEach(el=>el.style.background=dark?"#222":"white");
 }
+
+// ---------- Security ----------
+document.addEventListener('contextmenu', e=>e.preventDefault());
+document.onkeydown=function(e){if(e.ctrlKey&&(e.key=="u"||e.key=="U")) return false;if(e.keyCode==123) return false;}
+
+// ---------- Show Phones on Load ----------
 showPhones();
+
+// Optional: show admin by pressing "Ctrl + Shift + A"
+document.addEventListener("keydown", function(e){if(e.ctrlKey && e.shiftKey && e.key==="A"){showAdmin();}});
 </script>
 </body>
-</html>
+  </html>
