@@ -1,305 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Nizami Mobile Shop</title>
-
+<meta charset="UTF-8">
+<title>Nizami UltraPro Mobile Shop</title>
 <style>
-
-body{font-family:Arial;margin:0;background:#f2f2f2}
-
-header{background:#0a0a23;color:white;text-align:center;padding:20px}
-
-.banner{width:100%;height:200px;overflow:hidden}
-
-.banner img{width:100%;height:200px;object-fit:cover}
-
-.search{text-align:center;margin:20px}
-
-.search input{padding:10px;width:80%;border-radius:8px;border:1px solid #ccc}
-
-.categories{text-align:center;margin:10px}
-
-.categories button{background:#007bff}
-
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-padding:20px
-}
-
-.card{
-background:white;
-padding:15px;
-border-radius:10px;
-text-align:center;
-box-shadow:0 0 10px rgba(0,0,0,0.1)
-}
-
-.card img{width:100%;border-radius:10px}
-
-button{
-background:#25D366;
-color:white;
-border:none;
-padding:10px;
-border-radius:6px;
-margin:5px;
-cursor:pointer
-}
-
-.cart{
-background:white;
-padding:15px;
-margin:20px;
-border-radius:10px
-}
-
-#adminPanel{
-display:none;
-background:white;
-padding:20px;
-margin:20px;
-border-radius:10px
-}
-
-.ai-btn{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#ff6600
-}
-
-#ai-box{
-position:fixed;
-bottom:80px;
-right:20px;
-background:white;
-padding:15px;
-border-radius:10px;
-display:none;
-width:200px
-}
-
+body{font-family:Arial;margin:0;background:linear-gradient(120deg,#e0f7fa,#fce4ec);color:#333;}
+header{background:#0a0a23;color:white;padding:15px;text-align:center;position:relative;}
+header img{height:50px;vertical-align:middle;margin-right:10px;}
+h1{display:inline;vertical-align:middle;font-size:28px;}
+.search{padding:10px;text-align:center;background:white;box-shadow:0 2px 10px rgba(0,0,0,0.1);}
+input,select{padding:8px;margin:5px;border-radius:5px;border:1px solid #ccc;}
+.container{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;padding:20px;}
+.card{background:white;padding:10px;border-radius:10px;text-align:center;box-shadow:0 0 15px rgba(0,0,0,0.15);position:relative;transition:0.3s;}
+.card:hover{transform:scale(1.05);}
+.card img{width:100%;height:180px;object-fit:contain;}
+.badge{background:red;color:white;padding:4px 8px;position:absolute;top:10px;left:10px;border-radius:5px;font-size:12px;}
+.rating{color:orange;}
+button{padding:8px;border:none;background:#0a0a23;color:white;margin:5px;border-radius:6px;cursor:pointer;transition:0.3s;}
+button:hover{background:#ff6600;}
+#cart{background:white;padding:15px;margin:10px;border-radius:10px;}
+#admin,#ai{background:white;padding:20px;margin:20px;border-radius:10px;box-shadow:0 0 15px rgba(0,0,0,0.1);}
+#details{display:none;position:fixed;top:20%;left:50%;transform:translateX(-50%);background:white;padding:20px;width:300px;border-radius:10px;box-shadow:0 0 20px rgba(0,0,0,0.3);text-align:center;}
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;color:white;padding:15px;border-radius:50%;font-size:22px;text-decoration:none;box-shadow:0 0 15px rgba(0,0,0,0.3);}
+.dark-mode{position:fixed;bottom:20px;left:20px;padding:10px;background:#0a0a23;color:white;border-radius:8px;cursor:pointer;}
+.banner{width:100%;height:220px;overflow:hidden;position:relative;margin-bottom:10px;}
+.banner img{width:100%;height:220px;object-fit:cover;transition:0.5s;}
 </style>
 </head>
-
 <body>
 
 <header>
+<img src="https://i.ibb.co/7S5G5tX/logo.png" alt="Logo">
 <h1>Nizami Mobile Shop</h1>
-<p>Maudaha Hamirpur</p>
 </header>
 
 <div class="banner">
-<img id="slider" src="https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s23-1.jpg">
+<img id="slider" src="https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s24-1.jpg">
 </div>
 
 <div class="search">
-<input id="search" placeholder="Search Mobile..." onkeyup="searchPhone()">
+<input id="search" placeholder="Search Phone">
+<select id="category">
+<option value="">All</option>
+<option>Samsung</option>
+<option>Apple</option>
+<option>Redmi</option>
+<option>OnePlus</option>
+<option>Vivo</option>
+<option>Realme</option>
+</select>
+<button onclick="showPhones()">Search</button>
 </div>
 
-<div class="categories">
-<button onclick="filterCategory('all')">All</button>
-<button onclick="filterCategory('Samsung')">Samsung</button>
-<button onclick="filterCategory('iPhone')">iPhone</button>
-<button onclick="filterCategory('Redmi')">Redmi</button>
-</div>
+<div class="container" id="phones"></div>
 
-<div id="products" class="products"></div>
-
-<div class="cart">
-<h2>Cart</h2>
-<div id="cart"></div>
+<div id="cart">
+<h3>Cart</h3>
+<div id="cart-items"></div>
 <button onclick="order()">Order on WhatsApp</button>
 </div>
 
-<button onclick="adminLogin()">Admin</button>
-
-<div id="adminPanel">
-
-<h2>Admin Panel</h2>
-
-<input id="pname" placeholder="Phone Name"><br><br>
-
-<input id="pprice" placeholder="Price"><br><br>
-
-<input id="pcategory" placeholder="Category"><br><br>
-
-<input type="file" id="pimage"><br><br>
-
+<div id="admin">
+<h3>Admin Panel</h3>
+<input id="pname" placeholder="Phone Name">
+<input id="pprice" placeholder="Price">
+<input id="pimg" placeholder="Image URL">
+<input id="pcat" placeholder="Category">
 <button onclick="addPhone()">Add Phone</button>
-
 </div>
 
-<button class="ai-btn" onclick="toggleAI()">AI</button>
-
-<div id="ai-box">
-<input id="ai-input" placeholder="Ask AI">
+<div id="ai">
+<h3>AI Assistant</h3>
+<input id="ai-input" placeholder="Ask about phones">
 <button onclick="aiReply()">Ask</button>
 <p id="ai-response"></p>
 </div>
 
+<div id="details">
+<img id="dimg" width="200">
+<h3 id="dname"></h3>
+<p id="dprice"></p>
+<button onclick="closeDetails()">Close</button>
+</div>
+
+<a class="whatsapp" href="https://wa.me/919119606562" target="_blank">💬</a>
+<div class="dark-mode" onclick="toggleDark()">🌓 Dark Mode</div>
+
 <script>
-
+// Banner Slider
 let banners=[
-"https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s23-1.jpg",
-"https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-14-1.jpg"
+"https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s24-1.jpg",
+"https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-15-pro-1.jpg",
+"https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-13-1.jpg"
 ];
-
 let b=0;
+setInterval(()=>{b=(b+1)%banners.length;document.getElementById("slider").src=banners[b];},3000);
 
-setInterval(()=>{
-b=(b+1)%banners.length;
-document.getElementById("slider").src=banners[b];
-},3000);
+// Load Phones from JSON
+let phones=[],cart=[];
+fetch('phones.json')
+.then(response => response.json())
+.then(data => {phones=data; showPhones();})
+.catch(err => console.error("Failed to load phones.json:", err));
 
-let phones=JSON.parse(localStorage.getItem("phones"))||[
-
-{name:"Samsung S23",price:75000,category:"Samsung",image:"https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s23-1.jpg"},
-
-{name:"iPhone 14",price:70000,category:"iPhone",image:"https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-14-1.jpg"},
-
-{name:"Redmi Note 13",price:18000,category:"Redmi",image:"https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-13-1.jpg"}
-
-];
-
-let cart=[];
-
-function savePhones(){
-localStorage.setItem("phones",JSON.stringify(phones));
-}
-
-function showPhones(list=phones){
-
+function showPhones(){
+let s=document.getElementById("search").value.toLowerCase();
+let c=document.getElementById("category").value;
 let html="";
-
-list.forEach(p=>{
-
-html+=`
-<div class="card">
+phones.forEach(p=>{
+if((p.name.toLowerCase().includes(s))&&(c==""||p.category==c)){
+html+=`<div class="card">
+<span class="badge">${p.offer}</span>
 <img src="${p.image}">
 <h3>${p.name}</h3>
 <p>${p.category}</p>
+<p class="rating">${p.rating}</p>
 <p>₹${p.price}</p>
-<button onclick="addCart('${p.name}',${p.price})">Add to Cart</button>
-</div>
-`;
-
+<button onclick="showDetails('${p.name}','${p.image}',${p.price})">View</button>
+<button onclick="addCart('${p.name}',${p.price})">Add</button>
+</div>`;
+}
 });
-
-document.getElementById("products").innerHTML=html;
-
+document.getElementById("phones").innerHTML=html;
 }
 
-function filterCategory(cat){
+function addCart(name,price){cart.push({name,price});let html="";cart.forEach(i=>{html+=i.name+" ₹"+i.price+"<br>";});document.getElementById("cart-items").innerHTML=html;}
 
-if(cat=="all") showPhones();
+function order(){let number="919119606562";let msg="Hello I want:\n";cart.forEach(i=>{msg+=i.name+" ₹"+i.price+"\n";});window.open("https://wa.me/"+number+"?text="+encodeURIComponent(msg));}
 
-else showPhones(phones.filter(p=>p.category==cat));
+function addPhone(){let name=document.getElementById("pname").value;let price=document.getElementById("pprice").value;let img=document.getElementById("pimg").value;let cat=document.getElementById("pcat").value||"Other";phones.push({name,price,image:img,category:cat,rating:"★★★★☆",offer:"New"});localStorage.setItem("phones",JSON.stringify(phones));showPhones();}
 
-}
+function showDetails(name,img,price){document.getElementById("details").style.display="block";document.getElementById("dimg").src=img;document.getElementById("dname").innerText=name;document.getElementById("dprice").innerText="₹"+price;}
+function closeDetails(){document.getElementById("details").style.display="none";}
 
-function addCart(name,price){
+function aiReply(){let q=document.getElementById("ai-input").value.toLowerCase();let r="";if(q.includes("cheap")) r="Best cheap phones: Redmi Note series"; else if(q.includes("gaming")) r="Best gaming phones: OnePlus or Samsung S series"; else if(q.includes("camera")) r="Best camera: iPhone series"; else r="Please contact us on WhatsApp.";document.getElementById("ai-response").innerText=r;}
 
-cart.push({name,price});
+let dark=false;function toggleDark(){dark=!dark;document.body.style.background=dark?"#111":"linear-gradient(120deg,#e0f7fa,#fce4ec)";document.body.style.color=dark?"white":"#333";document.querySelectorAll(".card").forEach(c=>c.style.background=dark?"#222":"white");document.querySelectorAll("#cart,#admin,#ai,#details").forEach(d=>d.style.background=dark?"#222":"white");}
 
-let html="";
-
-cart.forEach(i=>{
-html+=`<p>${i.name} - ₹${i.price}</p>`;
-});
-
-document.getElementById("cart").innerHTML=html;
-
-}
-
-function order(){
-
-let number="919119606562";
-
-let msg="Hello Nizami Mobile Shop I want:\n";
-
-cart.forEach(i=>{
-msg+=i.name+" ₹"+i.price+"\n";
-});
-
-window.open("https://wa.me/"+number+"?text="+encodeURIComponent(msg));
-
-}
-
-function searchPhone(){
-
-let input=document.getElementById("search").value.toLowerCase();
-
-document.querySelectorAll(".card").forEach(card=>{
-card.style.display=card.innerText.toLowerCase().includes(input)?"block":"none";
-});
-
-}
-
-function adminLogin(){
-
-let pass=prompt("Enter Admin Password");
-
-if(pass=="1234"){
-document.getElementById("adminPanel").style.display="block";
-}
-
-}
-
-function addPhone(){
-
-let name=document.getElementById("pname").value;
-
-let price=document.getElementById("pprice").value;
-
-let category=document.getElementById("pcategory").value;
-
-let file=document.getElementById("pimage").files[0];
-
-let reader=new FileReader();
-
-reader.onload=function(e){
-
-phones.push({name,price,category,image:e.target.result});
-
-savePhones();
-
-showPhones();
-
-};
-
-if(file) reader.readAsDataURL(file);
-
-}
-
-function toggleAI(){
-
-let box=document.getElementById("ai-box");
-
-box.style.display=box.style.display==="block"?"none":"block";
-
-}
-
-function aiReply(){
-
-let q=document.getElementById("ai-input").value.toLowerCase();
-
-let r="";
-
-if(q.includes("iphone")) r="iPhone phones available.";
-else if(q.includes("samsung")) r="Samsung mobiles available.";
-else if(q.includes("redmi")) r="Redmi mobiles available.";
-else r="Please contact on WhatsApp.";
-
-document.getElementById("ai-response").innerText=r;
-
-}
-
-showPhones();
-
+// Security
+document.addEventListener('contextmenu', e=>e.preventDefault());
+document.onkeydown=function(e){if(e.ctrlKey&&(e.key=="u"||e.key=="U")) return false;if(e.keyCode==123) return false;}
 </script>
-
 </body>
-    </html>
+</html>
