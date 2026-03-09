@@ -3,72 +3,49 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Nizami Mobile Shop</title>
+<title>Nizami UltraPro Mobile Shop</title>
 
 <style>
 
 body{
-font-family: Arial;
+font-family:Arial;
 margin:0;
-background:#f1f3f6;
+background:linear-gradient(120deg,#e0f7fa,#fce4ec);
 }
-
-/* Header */
 
 header{
-background:#131921;
+background:#0a0a23;
 color:white;
 padding:15px;
-display:flex;
-align-items:center;
-}
-
-.logo{
-font-size:22px;
-font-weight:bold;
-margin-right:20px;
+text-align:center;
 }
 
 .search{
-flex:1;
-}
-
-.search input{
-width:100%;
 padding:10px;
-border-radius:4px;
-border:none;
+background:white;
+text-align:center;
 }
 
-/* Banner */
-
-.banner{
-height:250px;
-background:url("https://images.unsplash.com/photo-1511707171634-5f897ff02aa9") center/cover;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:35px;
-color:white;
-font-weight:bold;
+input,select{
+padding:8px;
+margin:5px;
+border-radius:5px;
+border:1px solid #ccc;
 }
 
-/* Products */
-
-.products{
+.container{
 display:grid;
-grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 gap:20px;
 padding:20px;
 }
 
 .card{
 background:white;
-border-radius:8px;
-padding:15px;
+padding:10px;
+border-radius:10px;
 text-align:center;
-box-shadow:0 2px 6px rgba(0,0,0,0.1);
+box-shadow:0 0 10px rgba(0,0,0,0.2);
 }
 
 .card img{
@@ -77,173 +54,247 @@ height:180px;
 object-fit:contain;
 }
 
-.price{
-color:green;
-font-weight:bold;
-margin:8px 0;
-}
-
 button{
-background:#ff9900;
+padding:8px;
 border:none;
-padding:10px;
-border-radius:5px;
+background:#0a0a23;
+color:white;
+border-radius:6px;
 cursor:pointer;
-width:100%;
+margin:5px;
 }
 
 button:hover{
-background:#f08804;
+background:#ff6600;
 }
 
-footer{
-background:#131921;
-color:white;
-text-align:center;
+#cart{
+background:white;
 padding:15px;
+margin:10px;
+border-radius:10px;
+}
+
+#details{
+display:none;
+position:fixed;
+top:10%;
+left:50%;
+transform:translateX(-50%);
+background:white;
+padding:20px;
+width:320px;
+border-radius:10px;
+box-shadow:0 0 20px rgba(0,0,0,0.4);
+text-align:center;
+}
+
+.banner img{
+width:100%;
+height:220px;
+object-fit:cover;
 }
 
 </style>
-
 </head>
 
 <body>
 
 <header>
-
-<div class="logo">Nizami Mobile Shop</div>
-
-<div class="search">
-<input type="text" id="search" placeholder="Search Mobile">
-</div>
-
+<h1>Nizami Mobile Shop</h1>
 </header>
 
 <div class="banner">
-Best Mobile Deals
+<img id="slider"
+src="https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s23-ultra.jpg"
+onerror="this.src='https://via.placeholder.com/1200x220?text=Nizami+Mobile+Shop'">
 </div>
 
-<div class="products">
+<div class="search">
+<input id="search" placeholder="Search Phone">
+<select id="category">
+<option value="">All</option>
+<option>Samsung</option>
+<option>Apple</option>
+<option>OnePlus</option>
+<option>Vivo</option>
+<option>Oppo</option>
+<option>Realme</option>
+<option>Motorola</option>
+<option>Google</option>
+</select>
 
-<!-- Samsung -->
-
-<div class="card">
-<img src="https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s23-5g-1.jpg"
-onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
-<h3>Samsung Galaxy S23</h3>
-<div class="price">₹74,999</div>
-<button onclick="order('Samsung Galaxy S23')">Order Now</button>
+<button onclick="showPhones()">Search</button>
 </div>
 
-<div class="card">
-<img src="https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s22-5g-1.jpg"
-onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
-<h3>Samsung Galaxy S22</h3>
-<div class="price">₹64,999</div>
-<button onclick="order('Samsung Galaxy S22')">Order Now</button>
+<div class="container" id="phones"></div>
+
+<div id="cart">
+<h3>Cart</h3>
+<div id="cart-items"></div>
+<button onclick="order()">Order on WhatsApp</button>
 </div>
 
-<!-- Apple -->
-
-<div class="card">
-<img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-14-1.jpg"
-onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
-<h3>iPhone 14</h3>
-<div class="price">₹69,999</div>
-<button onclick="order('iPhone 14')">Order Now</button>
+<div id="details">
+<img id="dimg" width="200">
+<h3 id="dname"></h3>
+<p id="dprice"></p>
+<p id="dscreen"></p>
+<p id="dbattery"></p>
+<p id="dcamera"></p>
+<button onclick="closeDetails()">Close</button>
 </div>
-
-<div class="card">
-<img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-01.jpg"
-onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
-<h3>iPhone 13</h3>
-<div class="price">₹59,999</div>
-<button onclick="order('iPhone 13')">Order Now</button>
-</div>
-
-<!-- OnePlus -->
-
-<div class="card">
-<img src="https://fdn2.gsmarena.com/vv/pics/oneplus/oneplus-11-1.jpg"
-onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
-<h3>OnePlus 11</h3>
-<div class="price">₹56,999</div>
-<button onclick="order('OnePlus 11')">Order Now</button>
-</div>
-
-<div class="card">
-<img src="https://fdn2.gsmarena.com/vv/pics/oneplus/oneplus-10-pro-1.jpg"
-onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
-<h3>OnePlus 10 Pro</h3>
-<div class="price">₹52,999</div>
-<button onclick="order('OnePlus 10 Pro')">Order Now</button>
-</div>
-
-<!-- Xiaomi -->
-
-<div class="card">
-<img src="https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-13-1.jpg"
-onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
-<h3>Xiaomi 13</h3>
-<div class="price">₹49,999</div>
-<button onclick="order('Xiaomi 13')">Order Now</button>
-</div>
-
-<div class="card">
-<img src="https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-12-pro-1.jpg"
-onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
-<h3>Redmi Note 12 Pro</h3>
-<div class="price">₹24,999</div>
-<button onclick="order('Redmi Note 12 Pro')">Order Now</button>
-</div>
-
-<!-- Vivo -->
-
-<div class="card">
-<img src="https://fdn2.gsmarena.com/vv/pics/vivo/vivo-x90-1.jpg"
-onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
-<h3>Vivo X90</h3>
-<div class="price">₹59,999</div>
-<button onclick="order('Vivo X90')">Order Now</button>
-</div>
-
-<!-- Oppo -->
-
-<div class="card">
-<img src="https://fdn2.gsmarena.com/vv/pics/oppo/oppo-find-x5-pro-1.jpg"
-onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
-<h3>Oppo Find X5 Pro</h3>
-<div class="price">₹64,999</div>
-<button onclick="order('Oppo Find X5 Pro')">Order Now</button>
-</div>
-
-</div>
-
-<footer>
-© 2026 Nizami Mobile Shop
-</footer>
 
 <script>
 
-function order(phone){
-alert("Order placed for: " + phone);
+/* Banner Slider */
+
+let banners=[
+"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s23-ultra.jpg",
+"https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-pro-max.jpg",
+"https://fdn2.gsmarena.com/vv/bigpic/google-pixel-8-pro.jpg"
+]
+
+let b=0
+
+setInterval(()=>{
+b=(b+1)%banners.length
+
+let img=document.getElementById("slider")
+
+img.src=banners[b]
+
+img.onerror=function(){
+this.src="https://via.placeholder.com/1200x220?text=Nizami+Mobile+Shop"
 }
 
-document.getElementById("search").addEventListener("keyup",function(){
+},3000)
 
-let value=this.value.toLowerCase()
 
-let cards=document.querySelectorAll(".card")
+/* Phones Data */
 
-cards.forEach(function(card){
+let phones=[
 
-let name=card.innerText.toLowerCase()
+{name:"Samsung Galaxy S23 Ultra",price:124999,image:"https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s23-ultra.jpg",category:"Samsung",specs:{screen:"6.8 AMOLED",battery:"5000mAh",camera:"200MP"}},
 
-card.style.display=name.includes(value)?"block":"none"
+{name:"iPhone 15 Pro Max",price:149999,image:"https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-pro-max.jpg",category:"Apple",specs:{screen:"6.7 OLED",battery:"4323mAh",camera:"48MP"}},
+
+{name:"OnePlus 12",price:81999,image:"https://fdn2.gsmarena.com/vv/bigpic/oneplus-12.jpg",category:"OnePlus",specs:{screen:"6.82 AMOLED",battery:"5400mAh",camera:"50MP"}},
+
+{name:"Google Pixel 8 Pro",price:92999,image:"https://fdn2.gsmarena.com/vv/bigpic/google-pixel-8-pro.jpg",category:"Google",specs:{screen:"6.7 OLED",battery:"5050mAh",camera:"50MP"}},
+
+{name:"Vivo X100 Pro",price:109999,image:"https://fdn2.gsmarena.com/vv/bigpic/vivo-x100-pro.jpg",category:"Vivo",specs:{screen:"6.78 AMOLED",battery:"5000mAh",camera:"50MP"}},
+
+{name:"Realme GT 5 Pro",price:49999,image:"https://fdn2.gsmarena.com/vv/bigpic/realme-gt5-pro.jpg",category:"Realme",specs:{screen:"6.74 AMOLED",battery:"5400mAh",camera:"50MP"}}
+
+]
+
+
+let cart=[]
+
+
+function showPhones(){
+
+let s=document.getElementById("search").value.toLowerCase()
+
+let c=document.getElementById("category").value
+
+let html=""
+
+phones.forEach(p=>{
+
+if((p.name.toLowerCase().includes(s))&&(c==""||p.category==c)){
+
+html+=`
+
+<div class="card">
+
+<img src="${p.image}" onerror="this.src='https://via.placeholder.com/300x300?text=Mobile'">
+
+<h3>${p.name}</h3>
+
+<p>₹${p.price}</p>
+
+<button onclick="showDetails('${p.name}')">View</button>
+
+<button onclick="addCart('${p.name}',${p.price})">Add</button>
+
+</div>
+
+`
+
+}
 
 })
 
+document.getElementById("phones").innerHTML=html
+
+}
+
+
+function addCart(name,price){
+
+cart.push({name,price})
+
+let html=""
+
+cart.forEach(i=>{
+
+html+=i.name+" ₹"+i.price+"<br>"
+
 })
+
+document.getElementById("cart-items").innerHTML=html
+
+}
+
+
+function order(){
+
+let msg="Hello I want:\n"
+
+cart.forEach(i=>{
+
+msg+=i.name+" ₹"+i.price+"\n"
+
+})
+
+window.open("https://wa.me/919119606562?text="+encodeURIComponent(msg))
+
+}
+
+
+function showDetails(name){
+
+let p=phones.find(ph=>ph.name===name)
+
+document.getElementById("details").style.display="block"
+
+let img=document.getElementById("dimg")
+
+img.src=p.image
+
+img.onerror=function(){
+this.src="https://via.placeholder.com/300x300?text=Mobile"
+}
+
+document.getElementById("dname").innerText=p.name
+document.getElementById("dprice").innerText="₹"+p.price
+document.getElementById("dscreen").innerText="Screen: "+p.specs.screen
+document.getElementById("dbattery").innerText="Battery: "+p.specs.battery
+document.getElementById("dcamera").innerText="Camera: "+p.specs.camera
+
+}
+
+
+function closeDetails(){
+
+document.getElementById("details").style.display="none"
+
+}
+
+
+showPhones()
 
 </script>
 
