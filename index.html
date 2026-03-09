@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Nizami Mobile Shop</title>
 
 <style>
@@ -40,21 +41,34 @@ border-radius:4px;
 border:none;
 }
 
+/* Banner */
+
+.banner{
+height:250px;
+background:url("https://images.unsplash.com/photo-1511707171634-5f897ff02aa9") center/cover;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:35px;
+color:white;
+font-weight:bold;
+}
+
 /* Products */
 
 .products{
 display:grid;
 grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-gap:15px;
+gap:20px;
 padding:20px;
 }
 
 .card{
 background:white;
-padding:15px;
 border-radius:8px;
-box-shadow:0 2px 5px rgba(0,0,0,0.1);
+padding:15px;
 text-align:center;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
 }
 
 .card img{
@@ -82,31 +96,48 @@ button:hover{
 background:#f08804;
 }
 
+footer{
+background:#131921;
+color:white;
+text-align:center;
+padding:15px;
+}
+
 </style>
+
 </head>
 
 <body>
 
 <header>
+
 <div class="logo">Nizami Mobile Shop</div>
+
 <div class="search">
-<input type="text" id="search" placeholder="Search Mobile...">
+<input type="text" id="search" placeholder="Search Mobile">
 </div>
+
 </header>
 
-<div class="products" id="productList">
+<div class="banner">
+Best Mobile Deals
+</div>
+
+<div class="products">
 
 <!-- Samsung -->
 
 <div class="card">
-<img src="https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s23-5g-1.jpg" onerror="this.src='https://via.placeholder.com/200x200?text=Mobile'">
+<img src="https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s23-5g-1.jpg"
+onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
 <h3>Samsung Galaxy S23</h3>
 <div class="price">₹74,999</div>
 <button onclick="order('Samsung Galaxy S23')">Order Now</button>
 </div>
 
 <div class="card">
-<img src="https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s22-5g-1.jpg" onerror="this.src='https://via.placeholder.com/200x200?text=Mobile'">
+<img src="https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s22-5g-1.jpg"
+onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
 <h3>Samsung Galaxy S22</h3>
 <div class="price">₹64,999</div>
 <button onclick="order('Samsung Galaxy S22')">Order Now</button>
@@ -115,14 +146,16 @@ background:#f08804;
 <!-- Apple -->
 
 <div class="card">
-<img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-14-1.jpg" onerror="this.src='https://via.placeholder.com/200x200?text=Mobile'">
+<img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-14-1.jpg"
+onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
 <h3>iPhone 14</h3>
 <div class="price">₹69,999</div>
 <button onclick="order('iPhone 14')">Order Now</button>
 </div>
 
 <div class="card">
-<img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-01.jpg" onerror="this.src='https://via.placeholder.com/200x200?text=Mobile'">
+<img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-01.jpg"
+onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
 <h3>iPhone 13</h3>
 <div class="price">₹59,999</div>
 <button onclick="order('iPhone 13')">Order Now</button>
@@ -131,14 +164,16 @@ background:#f08804;
 <!-- OnePlus -->
 
 <div class="card">
-<img src="https://fdn2.gsmarena.com/vv/pics/oneplus/oneplus-11-1.jpg" onerror="this.src='https://via.placeholder.com/200x200?text=Mobile'">
+<img src="https://fdn2.gsmarena.com/vv/pics/oneplus/oneplus-11-1.jpg"
+onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
 <h3>OnePlus 11</h3>
 <div class="price">₹56,999</div>
 <button onclick="order('OnePlus 11')">Order Now</button>
 </div>
 
 <div class="card">
-<img src="https://fdn2.gsmarena.com/vv/pics/oneplus/oneplus-10-pro-1.jpg" onerror="this.src='https://via.placeholder.com/200x200?text=Mobile'">
+<img src="https://fdn2.gsmarena.com/vv/pics/oneplus/oneplus-10-pro-1.jpg"
+onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
 <h3>OnePlus 10 Pro</h3>
 <div class="price">₹52,999</div>
 <button onclick="order('OnePlus 10 Pro')">Order Now</button>
@@ -147,4 +182,70 @@ background:#f08804;
 <!-- Xiaomi -->
 
 <div class="card">
-<img
+<img src="https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-13-1.jpg"
+onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
+<h3>Xiaomi 13</h3>
+<div class="price">₹49,999</div>
+<button onclick="order('Xiaomi 13')">Order Now</button>
+</div>
+
+<div class="card">
+<img src="https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-note-12-pro-1.jpg"
+onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
+<h3>Redmi Note 12 Pro</h3>
+<div class="price">₹24,999</div>
+<button onclick="order('Redmi Note 12 Pro')">Order Now</button>
+</div>
+
+<!-- Vivo -->
+
+<div class="card">
+<img src="https://fdn2.gsmarena.com/vv/pics/vivo/vivo-x90-1.jpg"
+onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
+<h3>Vivo X90</h3>
+<div class="price">₹59,999</div>
+<button onclick="order('Vivo X90')">Order Now</button>
+</div>
+
+<!-- Oppo -->
+
+<div class="card">
+<img src="https://fdn2.gsmarena.com/vv/pics/oppo/oppo-find-x5-pro-1.jpg"
+onerror="this.src='https://via.placeholder.com/200?text=Mobile'">
+<h3>Oppo Find X5 Pro</h3>
+<div class="price">₹64,999</div>
+<button onclick="order('Oppo Find X5 Pro')">Order Now</button>
+</div>
+
+</div>
+
+<footer>
+© 2026 Nizami Mobile Shop
+</footer>
+
+<script>
+
+function order(phone){
+alert("Order placed for: " + phone);
+}
+
+document.getElementById("search").addEventListener("keyup",function(){
+
+let value=this.value.toLowerCase()
+
+let cards=document.querySelectorAll(".card")
+
+cards.forEach(function(card){
+
+let name=card.innerText.toLowerCase()
+
+card.style.display=name.includes(value)?"block":"none"
+
+})
+
+})
+
+</script>
+
+</body>
+  </html>
