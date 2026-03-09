@@ -3,138 +3,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Nizami Mobile Shop</title>
 
 <style>
 
 body{
+font-family: Arial;
 margin:0;
-font-family:Arial;
-background:#f3f3f3;
+background:#f1f3f6;
 }
 
-/* HEADER */
+/* Header */
 
-.top-header{
+header{
 background:#131921;
 color:white;
+padding:15px;
 display:flex;
 align-items:center;
-gap:15px;
-padding:10px;
 }
 
 .logo{
-display:flex;
-align-items:center;
-gap:8px;
+font-size:22px;
 font-weight:bold;
-font-size:20px;
+margin-right:20px;
 }
 
-.logo img{
-width:35px;
-border-radius:6px;
-}
-
-.search-box{
+.search{
 flex:1;
-display:flex;
 }
 
-.search-box input{
+.search input{
 width:100%;
 padding:10px;
+border-radius:4px;
 border:none;
 }
 
-.search-box button{
-background:#febd69;
-border:none;
-padding:10px 15px;
-}
-
-.cart{
-background:white;
-color:black;
-padding:6px 10px;
-border-radius:6px;
-font-weight:bold;
-}
-
-/* MENU */
-
-.menu{
-background:#232f3e;
-color:white;
-display:flex;
-gap:20px;
-padding:10px;
-}
-
-/* BANNER */
-
-.banner img{
-width:100%;
-height:250px;
-object-fit:cover;
-}
-
-/* PRODUCTS */
+/* Products */
 
 .products{
 display:grid;
 grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-gap:20px;
+gap:15px;
 padding:20px;
 }
 
-.product{
+.card{
 background:white;
-padding:10px;
+padding:15px;
 border-radius:8px;
+box-shadow:0 2px 5px rgba(0,0,0,0.1);
 text-align:center;
-box-shadow:0 2px 6px rgba(0,0,0,0.1);
 }
 
-.product img{
+.card img{
 width:100%;
 height:180px;
-object-fit:cover;
+object-fit:contain;
 }
 
 .price{
-color:#007600;
+color:green;
 font-weight:bold;
-}
-
-.rating{
-color:#ffa41c;
+margin:8px 0;
 }
 
 button{
-margin:5px;
-padding:8px 12px;
-border:none;
-border-radius:6px;
-}
-
-.cartBtn{
 background:#ff9900;
-color:white;
+border:none;
+padding:10px;
+border-radius:5px;
+cursor:pointer;
+width:100%;
 }
 
-.buyBtn{
-background:#25D366;
-color:white;
-}
-
-footer{
-background:#131921;
-color:white;
-text-align:center;
-padding:20px;
+button:hover{
+background:#f08804;
 }
 
 </style>
@@ -142,144 +87,64 @@ padding:20px;
 
 <body>
 
-<!-- HEADER -->
+<header>
+<div class="logo">Nizami Mobile Shop</div>
+<div class="search">
+<input type="text" id="search" placeholder="Search Mobile...">
+</div>
+</header>
 
-<div class="top-header">
+<div class="products" id="productList">
 
-<div class="logo">
-<img src="logo.png">
-Nizami Mobile Shop
+<!-- Samsung -->
+
+<div class="card">
+<img src="https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s23-5g-1.jpg" onerror="this.src='https://via.placeholder.com/200x200?text=Mobile'">
+<h3>Samsung Galaxy S23</h3>
+<div class="price">₹74,999</div>
+<button onclick="order('Samsung Galaxy S23')">Order Now</button>
 </div>
 
-<div class="search-box">
-<input type="text" id="searchBar" placeholder="Search mobiles">
-<button>🔍</button>
+<div class="card">
+<img src="https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s22-5g-1.jpg" onerror="this.src='https://via.placeholder.com/200x200?text=Mobile'">
+<h3>Samsung Galaxy S22</h3>
+<div class="price">₹64,999</div>
+<button onclick="order('Samsung Galaxy S22')">Order Now</button>
 </div>
 
-<div class="cart">
-🛒 Cart (<span id="cartCount">0</span>)
+<!-- Apple -->
+
+<div class="card">
+<img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-14-1.jpg" onerror="this.src='https://via.placeholder.com/200x200?text=Mobile'">
+<h3>iPhone 14</h3>
+<div class="price">₹69,999</div>
+<button onclick="order('iPhone 14')">Order Now</button>
 </div>
 
+<div class="card">
+<img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-13-01.jpg" onerror="this.src='https://via.placeholder.com/200x200?text=Mobile'">
+<h3>iPhone 13</h3>
+<div class="price">₹59,999</div>
+<button onclick="order('iPhone 13')">Order Now</button>
 </div>
 
-<div class="menu">
-<div>All</div>
-<div>Mobiles</div>
-<div>Accessories</div>
-<div>Deals</div>
-<div>Best Sellers</div>
+<!-- OnePlus -->
+
+<div class="card">
+<img src="https://fdn2.gsmarena.com/vv/pics/oneplus/oneplus-11-1.jpg" onerror="this.src='https://via.placeholder.com/200x200?text=Mobile'">
+<h3>OnePlus 11</h3>
+<div class="price">₹56,999</div>
+<button onclick="order('OnePlus 11')">Order Now</button>
 </div>
 
-<div class="banner">
-<img src="https://images.pexels.com/photos/4042808/pexels-photo-4042808.jpeg">
+<div class="card">
+<img src="https://fdn2.gsmarena.com/vv/pics/oneplus/oneplus-10-pro-1.jpg" onerror="this.src='https://via.placeholder.com/200x200?text=Mobile'">
+<h3>OnePlus 10 Pro</h3>
+<div class="price">₹52,999</div>
+<button onclick="order('OnePlus 10 Pro')">Order Now</button>
 </div>
 
-<div class="products" id="productGrid"></div>
+<!-- Xiaomi -->
 
-<footer>
-<p>Nizami Mobile Shop | Maudaha Hamirpur</p>
-<p>Contact: 9119606562</p>
-</footer>
-
-<script>
-
-let cart=[];
-
-const basePhones=[
-
-"Samsung Galaxy S23",
-"Samsung Galaxy S24",
-"iPhone 14",
-"iPhone 15",
-"OnePlus 11",
-"OnePlus 12",
-"Vivo V29",
-"Vivo V30",
-"Realme GT",
-"Realme Narzo",
-"Redmi Note 12",
-"Redmi Note 13"
-
-];
-
-const products=[];
-
-for(let i=0;i<100;i++){
-
-let name=basePhones[i%basePhones.length]+" "+(i+1);
-
-products.push({
-
-name:name,
-price:15000+Math.floor(Math.random()*90000),
-rating:(Math.random()*2+3).toFixed(1),
-image:"https://images.pexels.com/photos/6078125/pexels-photo-6078125.jpeg"
-
-});
-
-}
-
-function displayProducts(list){
-
-const grid=document.getElementById("productGrid");
-
-grid.innerHTML="";
-
-list.forEach(p=>{
-
-grid.innerHTML+=`
-
-<div class="product">
-
-<img src="${p.image}">
-
-<h3>${p.name}</h3>
-
-<div class="rating">⭐ ${p.rating}</div>
-
-<p class="price">₹${p.price.toLocaleString()}</p>
-
-<button class="cartBtn" onclick="addToCart('${p.name}')">Add To Cart</button>
-
-<button class="buyBtn" onclick="buyPhone('${p.name}')">Buy Now</button>
-
-</div>
-
-`;
-
-});
-
-}
-
-function addToCart(name){
-
-cart.push(name);
-
-document.getElementById("cartCount").innerText=cart.length;
-
-}
-
-function buyPhone(name){
-
-const msg=encodeURIComponent("Hello I want to buy "+name);
-
-window.open("https://wa.me/9119606562?text="+msg);
-
-}
-
-document.getElementById("searchBar").addEventListener("input",function(){
-
-let value=this.value.toLowerCase();
-
-let filtered=products.filter(p=>p.name.toLowerCase().includes(value));
-
-displayProducts(filtered);
-
-});
-
-displayProducts(products);
-
-</script>
-
-</body>
-</html>
+<div class="card">
+<img
