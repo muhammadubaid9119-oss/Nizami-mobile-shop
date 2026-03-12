@@ -84,3 +84,8 @@ color:white;
 text-align:center;
 padding:15px;
   }
+
+.logo img{
+height:45px;
+border-radius:6px;
+}
