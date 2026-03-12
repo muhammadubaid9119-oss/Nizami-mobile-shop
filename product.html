@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>All Mobiles - Nizam Mobiles</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f2f2f2;
+}
+
+header{
+background:#131921;
+color:white;
+padding:15px;
+font-size:20px;
+}
+
+.products{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+
+gap:15px;
+
+padding:15px;
+
+}
+
+.product{
+
+background:white;
+
+padding:10px;
+
+border-radius:10px;
+
+text-align:center;
+
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+
+}
+
+.product img{
+
+width:100%;
+
+height:150px;
+
+object-fit:contain;
+
+}
+
+.price{
+
+color:green;
+
+font-weight:bold;
+
+}
+
+button{
+
+background:#ff9900;
+
+border:none;
+
+padding:8px;
+
+margin-top:5px;
+
+border-radius:5px;
+
+cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+All Smartphones
+
+</header>
+
+<div class="products">
+
+<script>
+
+const phones=[
+
+{name:"Samsung S23",price:"62000",img:"https://m.media-amazon.com/images/I/61VfL-aiToL._SL1500_.jpg"},
+
+{name:"Samsung S22",price:"55000",img:"https://m.media-amazon.com/images/I/71xb2xkN5qL._SL1500_.jpg"},
+
+{name:"Samsung A54",price:"34000",img:"https://m.media-amazon.com/images/I/71V--WZVUIL._SL1500_.jpg"},
+
+{name:"Samsung A34",price:"29000",img:"https://m.media-amazon.com/images/I/71w3oJ7aWyL._SL1500_.jpg"},
+
+{name:"Samsung M34",price:"20000",img:"https://m.media-amazon.com/images/I/81ZG+qK+kwL._SL1500_.jpg"},
+
+{name:"iPhone 15",price:"75000",img:"https://m.media-amazon.com/images/I/71d7rfSl0wL._SL1500_.jpg"},
+
+{name:"iPhone 14",price:"65000",img:"https://m.media-amazon.com/images/I/61cwywLZR-L._SL1500_.jpg"},
+
+{name:"iPhone 13",price:"52000",img:"https://m.media-amazon.com/images/I/61-r9zOKBCL._SL1500_.jpg"},
+
+{name:"iPhone 12",price:"42000",img:"https://m.media-amazon.com/images/I/71ZOtNdaZCL._SL1500_.jpg"},
+
+{name:"iPhone 11",price:"35000",img:"https://m.media-amazon.com/images/I/71i2XhHU3pL._SL1500_.jpg"},
+
+{name:"OnePlus 12",price:"65000",img:"https://m.media-amazon.com/images/I/71o8Q5XJS5L._SL1500_.jpg"},
+
+{name:"OnePlus 11",price:"56000",img:"https://m.media-amazon.com/images/I/61amb0CfMGL._SL1500_.jpg"},
+
+{name:"OnePlus Nord CE3",price:"28000",img:"https://m.media-amazon.com/images/I/61LB+d0vheL._SL1500_.jpg"},
+
+{name:"OnePlus Nord 2",price:"30000",img:"https://m.media-amazon.com/images/I/71gQe9uJk6L._SL1500_.jpg"},
+
+{name:"OnePlus Nord N30",price:"24000",img:"https://m.media-amazon.com/images/I/71YjI7Wg3kL._SL1500_.jpg"},
+
+{name:"Realme Narzo 60",price:"15000",img:"https://m.media-amazon.com/images/I/71DSxfKzkJL._SL1500_.jpg"},
+
+{name:"Realme 11",price:"17000",img:"https://m.media-amazon.com/images/I/71sp5A4s9SL._SL1500_.jpg"},
+
+{name:"Realme GT Neo",price:"28000",img:"https://m.media-amazon.com/images/I/71yTvU9VgdL._SL1500_.jpg"},
+
+{name:"Realme C55",price:"12000",img:"https://m.media-amazon.com/images/I/71dEY4Neo3L._SL1500_.jpg"},
+
+{name:"Realme 10",price:"16000",img:"https://m.media-amazon.com/images/I/81l3rZK4lnL._SL1500_.jpg"},
+
+{name:"Redmi Note 13",price:"18000",img:"https://m.media-amazon.com/images/I/71VW8LmqqPL._SL1500_.jpg"},
+
+{name:"Redmi Note 12",price:"16000",img:"https://m.media-amazon.com/images/I/81wN3DJSbEL._SL1500_.jpg"},
+
+{name:"Redmi 12",price:"12000",img:"https://m.media-amazon.com/images/I/71tCOhEigtL._SL1500_.jpg"},
+
+{name:"Redmi 11",price:"10000",img:"https://m.media-amazon.com/images/I/81J+7x6xv-L._SL1500_.jpg"},
+
+{name:"Redmi K50",price:"30000",img:"https://m.media-amazon.com/images/I/81ZSn2rk9WL._SL1500_.jpg"}
+
+]
+
+for(let i=0;i<phones.length;i++){
+
+document.write(`
+
+<div class="product">
+
+<img src="${phones[i].img}">
+
+<h4>${phones[i].name}</h4>
+
+<p class="price">₹${phones[i].price}</p>
+
+<button onclick="order('${phones[i].name}')">Order</button>
+
+</div>
+
+`)
+
+}
+
+function order(name){
+
+let phone="9119606562"
+
+let msg="I want to buy "+name
+
+window.open("https://wa.me/"+phone+"?text="+msg)
+
+}
+
+</script>
+
+</div>
+
+</body>
+  </html>
