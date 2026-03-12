@@ -1,247 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Nizami Mobile Shop</title>
+<title>Nizam Mobiles</title>
 
-<style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-body{
-font-family:Arial;
-margin:0;
-background:#f2f2f2;
-}
+<link rel="stylesheet" href="style.css">
 
-/* HEADER */
-
-header{
-background:#131921;
-color:white;
-padding:15px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-}
-
-.logo{
-font-size:22px;
-font-weight:bold;
-}
-
-.search-box{
-width:50%;
-}
-
-.search-box input{
-width:100%;
-padding:8px;
-border:none;
-border-radius:4px;
-}
-
-.icons{
-font-size:18px;
-}
-
-/* PRODUCTS */
-
-.container{
-padding:20px;
-}
-
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:20px;
-}
-
-.product{
-background:white;
-padding:10px;
-border-radius:8px;
-text-align:center;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
-transition:0.3s;
-}
-
-.product:hover{
-transform:scale(1.05);
-}
-
-.product img{
-width:100%;
-height:150px;
-object-fit:contain;
-}
-
-.price{
-color:green;
-font-weight:bold;
-}
-
-button{
-background:#ff9900;
-border:none;
-padding:8px 12px;
-margin-top:5px;
-cursor:pointer;
-border-radius:5px;
-}
-
-/* OFFER */
-
-.offer{
-background:#ffe8cc;
-padding:20px;
-text-align:center;
-font-size:18px;
-}
-
-/* REVIEW */
-
-.reviews{
-background:white;
-padding:20px;
-}
-
-.review{
-margin-bottom:10px;
-}
-
-/* CONTACT */
-
-.contact{
-background:#e3f2fd;
-padding:20px;
-text-align:center;
-}
-
-/* FOOTER */
-
-footer{
-background:#131921;
-color:white;
-text-align:center;
-padding:15px;
-}
-
-</style>
 </head>
 
 <body>
 
 <header>
 
-<div class="logo">Nizami Mobile Shop</div>
+<div class="logo">
 
-<div class="search-box">
-<input type="text" placeholder="Search Mobile...">
+<img src="logo.png">
+
 </div>
 
+<input type="text" id="search" placeholder="Search Mobiles...">
+
 <div class="icons">
-❤️ Wishlist | 🛒 Cart <span id="cart">0</span>
+
+❤️ <span id="wish">0</span>
+
+🛒 <span id="cart">0</span>
+
 </div>
 
 </header>
 
-<div class="offer">
-🔥 Mega Offer – All Smartphones up to 40% OFF
-</div>
 
-<div class="container">
+<section class="categories">
 
-<div class="products">
+<div>Samsung</div>
+<div>Apple</div>
+<div>OnePlus</div>
+<div>Realme</div>
+<div>Xiaomi</div>
 
-<script>
+</section>
 
-let cart=0
 
-const phones=[
+<section class="offer">
 
-{name:"Samsung S23",price:"₹62000",img:"https://m.media-amazon.com/images/I/61VfL-aiToL._SL1500_.jpg"},
-{name:"iPhone 14",price:"₹65000",img:"https://m.media-amazon.com/images/I/61cwywLZR-L._SL1500_.jpg"},
-{name:"OnePlus 11",price:"₹56000",img:"https://m.media-amazon.com/images/I/61amb0CfMGL._SL1500_.jpg"},
-{name:"Realme Narzo",price:"₹15000",img:"https://m.media-amazon.com/images/I/71DSxfKzkJL._SL1500_.jpg"},
-{name:"Redmi Note 13",price:"₹18000",img:"https://m.media-amazon.com/images/I/71VW8LmqqPL._SL1500_.jpg"},
-{name:"iPhone 13",price:"₹52000",img:"https://m.media-amazon.com/images/I/61-r9zOKBCL._SL1500_.jpg"},
-{name:"Samsung A54",price:"₹34000",img:"https://m.media-amazon.com/images/I/71V--WZVUIL._SL1500_.jpg"},
-{name:"Realme GT",price:"₹30000",img:"https://m.media-amazon.com/images/I/71yTvU9VgdL._SL1500_.jpg"},
-{name:"OnePlus Nord",price:"₹29000",img:"https://m.media-amazon.com/images/I/61LB+d0vheL._SL1500_.jpg"},
-{name:"Redmi 12",price:"₹12000",img:"https://m.media-amazon.com/images/I/71tCOhEigtL._SL1500_.jpg"}
+🔥 Mega Offer – Smartphones up to 40% OFF
 
-]
+</section>
 
-phones.forEach(p=>{
 
-document.write(`
+<section class="products" id="products">
 
-<div class="product">
+</section>
 
-<img src="${p.img}">
 
-<h4>${p.name}</h4>
-
-<p class="price">${p.price}</p>
-
-<button onclick="order('${p.name}')">Order</button>
-
-<button onclick="addCart()">Add Cart</button>
-
-</div>
-
-`)
-
-})
-
-function addCart(){
-
-cart++
-document.getElementById("cart").innerText=cart
-
-}
-
-function order(name){
-
-let phone="9119606562"
-
-let msg="I want to buy "+name
-
-window.open("https://wa.me/"+phone+"?text="+msg)
-
-}
-
-</script>
-
-</div>
-
-</div>
-
-<div class="reviews">
+<section class="reviews">
 
 <h2>Customer Reviews</h2>
 
-<div class="review">⭐⭐⭐⭐⭐ Best Mobile Shop</div>
-<div class="review">⭐⭐⭐⭐ Fast Delivery</div>
-<div class="review">⭐⭐⭐⭐⭐ Genuine Phones</div>
+<p>⭐⭐⭐⭐⭐ Best mobile shop</p>
 
-</div>
+<p>⭐⭐⭐⭐ Fast delivery</p>
 
-<div class="contact">
+<p>⭐⭐⭐⭐⭐ Original phones</p>
+
+</section>
+
+
+<section class="contact">
 
 <h2>Contact Us</h2>
 
 <p>📞 9119606562</p>
-<p>📍 Nizami Mobile Shop</p>
 
-</div>
+<p>Nizam Mobiles Sales & Services</p>
+
+</section>
+
 
 <footer>
 
-© 2026 Nizami Mobile Shop
+© 2026 Nizam Mobiles
 
 </footer>
 
+
+<script src="script.js"></script>
+
 </body>
-  </html>
+
+</html>
