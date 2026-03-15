@@ -1,64 +1,48 @@
-let cart=0
-let wish=0
+let phones=[
 
-const phones=[
+{
+name:"iPhone 15",
+price:"₹79999",
+img:"https://m.media-amazon.com/images/I/71d7rfSl0wL._SX679_.jpg"
+},
 
 {
 name:"Samsung S23",
-price:"62000",
-img:"https://m.media-amazon.com/images/I/61VfL-aiToL._SL1500_.jpg"
+price:"₹69999",
+img:"https://m.media-amazon.com/images/I/61VfL-aiToL._SX679_.jpg"
 },
 
 {
-name:"iPhone 14",
-price:"65000",
-img:"https://m.media-amazon.com/images/I/61cwywLZR-L._SL1500_.jpg"
+name:"Vivo X100",
+price:"₹59999",
+img:"https://m.media-amazon.com/images/I/61kReoQYJ-L._SX679_.jpg"
 },
 
 {
-name:"OnePlus 11",
-price:"56000",
-img:"https://m.media-amazon.com/images/I/61amb0CfMGL._SL1500_.jpg"
-},
-
-{
-name:"Realme Narzo",
-price:"15000",
-img:"https://m.media-amazon.com/images/I/71DSxfKzkJL._SL1500_.jpg"
-},
-
-{
-name:"Redmi Note 13",
-price:"18000",
-img:"https://m.media-amazon.com/images/I/71VW8LmqqPL._SL1500_.jpg"
+name:"POCO F5",
+price:"₹29999",
+img:"https://m.media-amazon.com/images/I/71x5wYJ9wFL._SX679_.jpg"
 }
 
 ]
 
+let cart=0
 
-let container=document.getElementById("products")
+let container=document.getElementById("phones")
 
-phones.forEach(p=>{
+phones.forEach((p)=>{
 
 container.innerHTML+=`
 
-<div class="product">
-
-<a href="product.html?name=${p.name}&price=${p.price}&img=${p.img}">
+<div class="phone">
 
 <img src="${p.img}">
 
-<h4>${p.name}</h4>
+<h3>${p.name}</h3>
 
-</a>
-
-<p>₹${p.price}</p>
+<p>${p.price}</p>
 
 <button onclick="addCart()">Add Cart</button>
-
-<button onclick="addWish()">Wishlist</button>
-
-<button onclick="order('${p.name}')">Order</button>
 
 </div>
 
@@ -66,31 +50,10 @@ container.innerHTML+=`
 
 })
 
-
 function addCart(){
 
 cart++
 
-document.getElementById("cart").innerText=cart
+document.getElementById("cart-count").innerText=cart
 
 }
-
-
-function addWish(){
-
-wish++
-
-document.getElementById("wish").innerText=wish
-
-}
-
-
-function order(name){
-
-let phone="9119606562"
-
-let msg="I want to buy "+name
-
-window.open("https://wa.me/"+phone+"?text="+msg)
-
-  }
